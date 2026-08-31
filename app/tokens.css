@@ -1,0 +1,470 @@
+/* ============================================================
+   Parallel Studios — Design Tokens
+   v1.0.0 · Base: Manual de Marca Rebranding 2026
+   ============================================================
+   FUENTE DE VERDAD de todos los valores de diseno del proyecto.
+   Se importa desde globals.css con layer(base) y se expone a Tailwind v4
+   con @theme inline. No hardcodear valores fuera de este archivo.
+   Doc:  ../../MARCA.md
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Tipografia — instalacion
+   ------------------------------------------------------------
+   Proxima Nova se sirve desde Adobe Fonts (kit mei2qho).
+   Agregar EN EL HTML, antes de este stylesheet:
+
+     <link rel="stylesheet" href="https://use.typekit.net/mei2qho.css">
+
+   No se puede self-hostear: lo prohibe el EULA de Typekit.
+   Kit mei2qho = pesos 400 y 700, normal e italica. Nada mas.
+
+   Lastica se sirve local desde /public/fonts/ (declarada abajo).
+   ------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Lastica";
+  /* Solo woff2: lo soporta todo navegador desde 2020. El .ttf que hay al lado
+     es para las apps de escritorio (Figma, Adobe), no para la web. */
+  src: url("/fonts/Lastica-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* Lastica NO tiene glifos acentuados ni enie.
+     El unicode-range limita la fuente a ASCII para que el navegador
+     resuelva cualquier caracter acentuado con Proxima Nova
+     en lugar de mostrar un glifo roto. */
+  unicode-range: U+0000-007F, U+00A0, U+00AD;
+}
+
+:root {
+  /* ---------- Color de marca ---------- */
+  --pl-red: #FF2D1D;      /* Pantone Bright Red C / 485 C */
+  --pl-deep: #F51006;     /* Pantone 485 C */
+  --pl-orange: #FF6A00;   /* Pantone Orange 021 C */
+
+  /* RGB crudos para composicion con alpha */
+  --pl-red-rgb: 255, 45, 29;
+  --pl-deep-rgb: 245, 16, 6;
+  --pl-orange-rgb: 255, 106, 0;
+
+  /* ---------- Neutrales (escala fria) ---------- */
+  --pl-black: #000000;
+  --pl-bg: #0A0B0C;
+  --pl-surface: #121417;
+  --pl-elevated: #1A1D21;
+  --pl-line: #24282E;
+  --pl-gray-600: #363B42;
+  --pl-gray-500: #4E545C;
+  --pl-gray-400: #6E757F;
+  --pl-gray-300: #9BA2AB;
+  --pl-gray-200: #C7CCD2;
+  --pl-gray-100: #E7EAEE;
+  --pl-white: #FFFFFF;
+
+  /* ---------- Semanticos (tema oscuro = por defecto) ---------- */
+  /* El fondo es NEGRO PURO, no el gris casi negro de interfaz.
+     Dos razones: los videos y renders de la marca vienen sobre negro puro,
+     y con #0A0B0C se recorta un rectangulo visible alrededor de cada uno;
+     y una landing es una pieza de alto impacto, que es justo el caso donde
+     MARCA.md §3 pide negro. Toda la rampa se corre un escalon: lo que era
+     el fondo pasa a ser la superficie, y asi con el resto. */
+  --pl-color-bg: var(--pl-black);
+  --pl-color-surface: var(--pl-bg);
+  --pl-color-elevated: var(--pl-surface);
+  --pl-color-border: var(--pl-line);
+
+  --pl-color-text: var(--pl-white);
+  --pl-color-text-body: var(--pl-gray-200);
+  --pl-color-text-secondary: var(--pl-gray-300);
+  --pl-color-text-muted: var(--pl-gray-400);
+  --pl-color-text-disabled: var(--pl-gray-600);
+
+  /* Sobre cualquier color de marca el texto va NEGRO.
+     Blanco sobre marca no pasa WCAG AA (3.72 / 4.23 / 2.87). */
+  --pl-color-text-on-accent: var(--pl-black);
+
+  --pl-color-accent: var(--pl-red);
+  --pl-color-accent-hover: var(--pl-orange);
+  --pl-color-accent-pressed: var(--pl-deep);
+
+  /* Rotulo tecnico en color. Red y no Deep: a 14px el rotulo no es texto
+     grande para WCAG, asi que necesita 4.5:1, y sobre elevated Red da 4.55
+     mientras que Deep se queda en 3.99. Tampoco Orange, que contrasta mejor
+     (5.89) pero se lee anaranjado y no rojizo.
+
+     Es el mismo color que el acento, no una variable de mas: se separan
+     porque no cambian juntos. El acento tiene que virar a Deep en el tema
+     claro para contrastar sobre blanco; el rotulo puede quedarse donde
+     este. */
+  --pl-color-text-accent: var(--pl-red);
+
+  /* ---------- Medidor de audio ---------- */
+  /* La envolvente de un master se dibuja en naranja de marca: es lo que la
+     seccion viene a mostrar, asi que se lleva el color.
+     La parte todavia no reproducida es el MISMO naranja rebajado y no un
+     gris. Con dos materiales distintos la barra se parte en dos objetos; con
+     uno solo se lee como una forma unica que se enciende al avanzar. */
+  --pl-color-meter-played: var(--pl-orange);
+  --pl-color-meter-track: rgba(var(--pl-orange-rgb), 0.34);
+
+  /* ---------- Degradados ---------- */
+  /* Set aprobado. Ninguna parada usa un color fuera de la paleta.
+     Ver MARCA.md §3 */
+
+  /* Oficial del isotipo. Orden y direccion fijos. No invertir. */
+  --pl-gradient-brand: linear-gradient(180deg, #FF6A00 0%, #FF2D1D 55%, #F51006 100%);
+  /* Mismo ramp a 135deg, para superficies anchas donde el barrido
+     vertical produce bandas. */
+  --pl-gradient-brand-diagonal: linear-gradient(135deg, #FF6A00 0%, #FF2D1D 55%, #F51006 100%);
+
+  /* Rotulo tecnico. Horizontal y de dos paradas, al reves que los de marca:
+     un rotulo mide 14px de alto, asi que un degradado vertical se resuelve en
+     catorce pixeles y corta el trazo en dos mitades de distinto color. A lo
+     ancho tiene el largo entero de la palabra para recorrer.
+     Sin Deep como tercera parada: sobre elevated cae a 3.99:1 y el final del
+     rotulo quedaria bajo el minimo. Naranja 5.89 y Red 4.55, los dos pasan. */
+  --pl-gradient-label: linear-gradient(90deg, #FF6A00 0%, #FF2D1D 100%);
+  /* VU meters e indicadores de nivel. */
+  --pl-gradient-heat-meter: linear-gradient(90deg, #FFB694 0%, #FF6A00 45%, #FF2D1D 80%, #F51006 100%);
+  /* Variante suave para rellenos grandes de baja jerarquia. */
+  --pl-gradient-ember: linear-gradient(180deg, #FFB4A8 0%, #FF5540 50%, #F51006 100%);
+  /* Halo radial. Solo sobre superficies casi negras. */
+  --pl-gradient-glow-red: radial-gradient(circle, rgba(255, 45, 29, 0.35) 0%, rgba(255, 45, 29, 0) 70%);
+  /* Resuelve imagenes y video contra el fondo de la pagina. Es lo que
+     garantiza que el texto sobre una secuencia se lea siempre. */
+  --pl-gradient-fade-to-bg: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 55%, #000000 100%);
+
+  /* ---------- Tipografia ---------- */
+  /* Lastica y Proxima Nova son las UNICAS familias oficiales.
+     No hay sustitutas aprobadas.
+
+     En --pl-font-display, proxima-nova va SEGUNDA a proposito:
+     combinado con el unicode-range del @font-face, cualquier caracter
+     acentuado (o, u, n) cae en Proxima Nova en vez de romperse.
+     Es una red de seguridad, no una licencia para titular con acentos:
+     la regla sigue siendo componer titulos sin tildes. Ver MARCA.md §4 */
+  --pl-font-display: "Lastica", "proxima-nova", "Proxima Nova", sans-serif;
+  --pl-font-text: "proxima-nova", "Proxima Nova", sans-serif;
+
+  /* Pesos disponibles. Lastica: solo 400.
+     Proxima Nova en el kit mei2qho: solo 400 y 700. */
+  --pl-weight-display: 400;
+  --pl-weight-regular: 400;
+  --pl-weight-bold: 700;
+
+  /* El escalon 2xl existe solo para el titular del hero. Es la unica pieza
+     de la pagina donde el texto compite con una escena a pantalla completa:
+     al tamano display-xl del manual el titular se lee como un subtitulo de
+     la animacion en vez de como lo primero que hay que leer. */
+  --pl-text-display-2xl: 6.5rem;   /* 104px */
+  --pl-text-display-xl: 4.75rem;   /* 76px */
+  --pl-text-display-lg: 3.813rem;  /* 61px */
+  --pl-text-display-md: 3.063rem;  /* 49px */
+  --pl-text-heading-lg: 2.438rem;  /* 39px */
+  --pl-text-heading-md: 1.938rem;  /* 31px */
+  --pl-text-heading-sm: 1.563rem;  /* 25px */
+  --pl-text-body-lg: 1.25rem;      /* 20px */
+  --pl-text-body-md: 1rem;         /* 16px */
+  --pl-text-body-sm: 0.875rem;     /* 14px */
+  --pl-text-caption: 0.75rem;      /* 12px */
+  /* Palabra gigante de separacion entre capitulos. Va a sangre y recortada
+     por los lados a proposito: es textura tipografica, no un titulo que haya
+     que leer entero. */
+  --pl-text-giant: clamp(3.5rem, 13vw, 11rem);
+
+  --pl-leading-display: 1.02;
+  --pl-leading-heading: 1.15;
+  --pl-leading-body: 1.55;
+  --pl-leading-caption: 1.4;
+
+  --pl-tracking-brand: 0.2em;
+  --pl-tracking-display: 0.12em;
+  --pl-tracking-heading: 0.02em;
+  --pl-tracking-body: 0;
+  --pl-tracking-caps: 0.08em;
+
+  /* ---------- Espaciado (base 4px) ---------- */
+  --pl-space-1: 0.25rem;
+  --pl-space-2: 0.5rem;
+  --pl-space-3: 0.75rem;
+  --pl-space-4: 1rem;
+  --pl-space-6: 1.5rem;
+  --pl-space-8: 2rem;
+  --pl-space-12: 3rem;
+  --pl-space-16: 4rem;
+  --pl-space-24: 6rem;
+  --pl-space-32: 8rem;
+
+  /* ---------- Radios ---------- */
+  --pl-radius-none: 0;
+  --pl-radius-sm: 0.25rem;
+  --pl-radius-md: 0.5rem;
+  --pl-radius-lg: 1rem;
+  --pl-radius-full: 9999px;
+
+  /* ---------- Bordes ---------- */
+  --pl-border-hairline: 1px;
+  --pl-border-thick: 2px;
+
+  /* ---------- Elevacion ---------- */
+  --pl-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --pl-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.7);
+  --pl-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.8);
+
+  /* Glow de marca. Solo sobre fondo negro.
+     Un unico elemento con glow por pieza. */
+  --pl-glow-brand:
+    0 0 12px rgba(var(--pl-red-rgb), 0.45),
+    0 0 48px rgba(var(--pl-deep-rgb), 0.25);
+
+  /* Glow del remate: texto encendido, no objeto iluminado.
+     Sale del naranja y no del rojo porque va sobre letra, y el rojo a este
+     radio empasta el contorno de los trazos. Tres radios y no dos: el corto
+     es el filo del glifo, el medio el halo que se lee como luz y el largo la
+     mancha que separa la frase del negro del fondo. */
+  --pl-glow-punch:
+    0 0 4px rgba(var(--pl-orange-rgb), 0.9),
+    0 0 18px rgba(var(--pl-orange-rgb), 0.55),
+    0 0 60px rgba(var(--pl-red-rgb), 0.3);
+
+  /* ---------- Movimiento ---------- */
+  /* Interfaz: cambios de estado, hover, foco. Cortos y sin caracter. */
+  --pl-duration-fast: 120ms;
+  --pl-duration-base: 200ms;
+  --pl-duration-slow: 400ms;
+  --pl-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --pl-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --pl-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+
+  /* Escena: entradas, revelados y capas grandes. Cuanto mas grande es lo que
+     se mueve, mas lento se mueve; un bloque entero a 200ms se siente violento.
+
+     expo es la curva de firma de la pieza: arranca rapidisimo y frena largo,
+     asi el objeto parece tener inercia. Se usa por defecto para todo lo que
+     aparece. spring solo donde el rebote signifique algo (un boton que acusa
+     recibo), nunca en bloques de texto. */
+  --pl-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --pl-ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --pl-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --pl-duration-reveal: 700ms;
+  --pl-duration-scene: 1100ms;
+  --pl-duration-intro: 1500ms;
+
+  /* Latido de los indicios de interaccion: el punto que avisa que una
+     tarjeta responde al puntero. Largo a proposito. Un pulso corto pide
+     atencion, y esto tiene que estar disponible sin pedirla — se nota
+     cuando el ojo ya esta ahi, no antes. */
+  --pl-duration-pulse: 2600ms;
+
+  /* Encendido del remate: el parpadeo de tubo antes de quedar prendido.
+     640ms es lo que aguanta un parpadeo sin leerse como un error de carga —
+     por encima de 800ms el visitante cree que algo se rompio. */
+  --pl-duration-ignite: 640ms;
+  /* Respiracion del remate una vez encendido. Mas largo que --pl-duration-pulse:
+     esto no pide atencion, ya la tiene; solo evita que la frase se congele. */
+  --pl-duration-breathe: 3400ms;
+
+  /* Retardo entre hermanos de una grilla que entra escalonada. Por debajo de
+     50ms el ojo lo lee como simultaneo; por encima de 120ms como lentitud. */
+  --pl-stagger: 70ms;
+
+  /* Distancia de la que sube un bloque al revelarse. Mas de 35px se lee como
+     un salto, menos de 15px no se percibe. */
+  --pl-reveal-shift: 28px;
+
+  /* ---------- Escenas dirigidas por scroll ---------- */
+  /* Distancia focal de las capas 3D. Entre 800 y 1000 esta el punto donde la
+     perspectiva se siente cinematografica sin deformar. Cada capa lleva la
+     suya: compartir una sola hace que el navegador ordene por profundidad en
+     vez de por z-index y el titular desaparece detras del fondo. */
+  --pl-perspective: 900px;
+  /* Techo duro de translateZ: 0.75 x la distancia focal. Pasado ese punto la
+     escala se dispara y un plano oscuro llena el viewport de negro. */
+  --pl-z-max: 675px;
+
+  /* ---------- Excepcion: marca de terceros ---------- */
+  /* El verde de WhatsApp NO es color de Parallel y no cuenta para la regla
+     80/15/5 (MARCA.md §3): es la identidad de un canal externo, no un acento
+     de esta marca. Se declara aca y no inline porque lint:hex prohibe hex
+     sueltos fuera de este archivo — vive aca por la misma regla que protege
+     el resto de la paleta, no porque sea parte de ella. Uso unico: el boton
+     flotante de WhatsApp, a pedido explicito (el set de iconos monolinea de
+     la marca no es reconocible para ese boton especifico). */
+  --pl-whatsapp: #25D366;
+  --pl-whatsapp-hover: #1EBE5A;
+
+  /* ---------- Layout ---------- */
+  /* Valores alineados con MARCA.md §6 (spec de la web), que es la fuente
+     de verdad de layout: container 1440px, margen 16px mobile / 64px desktop. */
+  --pl-grid-columns: 12;
+  --pl-gutter: var(--pl-space-6);      /* 24px */
+  --pl-margin: var(--pl-space-4);      /* 16px mobile */
+  --pl-content-max: 1440px;
+  --pl-measure: 68ch;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pl-margin: var(--pl-space-16);   /* 64px desktop */
+  }
+}
+
+/* ============================================================
+   Tema claro — funcional, no de campana.
+   La marca vive en oscuro; esto es para documentos y print.
+   ============================================================ */
+[data-theme="light"] {
+  --pl-color-bg: var(--pl-white);
+  --pl-color-surface: #F7F8F9;
+  --pl-color-elevated: var(--pl-white);
+  --pl-color-border: var(--pl-gray-100);
+
+  --pl-color-text: var(--pl-bg);
+  --pl-color-text-body: #24282E;
+  --pl-color-text-secondary: var(--pl-gray-500);
+  --pl-color-text-muted: var(--pl-gray-400);
+
+  /* Deep tiene mejor contraste que Red sobre blanco */
+  --pl-color-accent: var(--pl-deep);
+  --pl-color-accent-hover: var(--pl-red);
+  --pl-color-accent-pressed: #C40D05;
+
+  /* Sobre blanco Red cae a 3.72:1. En claro el rotulo va en Deep, igual que
+     el acento. */
+  --pl-color-text-accent: var(--pl-deep);
+
+  /* Sobre blanco el naranja al 24% desaparece. */
+  --pl-color-meter-track: rgba(var(--pl-orange-rgb), 0.42);
+
+  --pl-shadow-1: 0 1px 2px rgba(10, 11, 12, 0.08);
+  --pl-shadow-2: 0 4px 12px rgba(10, 11, 12, 0.10);
+  --pl-shadow-3: 0 12px 32px rgba(10, 11, 12, 0.12);
+}
+
+/* ============================================================
+   Primitivas
+   ============================================================ */
+
+body {
+  background-color: var(--pl-color-bg);
+  color: var(--pl-color-text-body);
+  font-family: var(--pl-font-text);
+  font-size: var(--pl-text-body-md);
+  line-height: var(--pl-leading-body);
+  letter-spacing: var(--pl-tracking-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .pl-display {
+  font-family: var(--pl-font-display);
+  font-weight: var(--pl-weight-display);
+  color: var(--pl-color-text);
+  line-height: var(--pl-leading-heading);
+  letter-spacing: var(--pl-tracking-heading);
+  text-wrap: balance;
+  /* Lastica no tiene bold ni italica. Sin esto el navegador
+     las sintetiza y deforma los trazos. */
+  font-synthesis: none;
+}
+
+/* Titulo que necesita acentos si o si: unica excepcion documentada
+   al reparto de familias. Ver MARCA.md §4 */
+.pl-heading--accented {
+  font-family: var(--pl-font-text);
+  font-weight: var(--pl-weight-bold);
+  letter-spacing: 0.06em;
+}
+
+h1 { font-size: var(--pl-text-heading-lg); }
+h2 { font-size: var(--pl-text-heading-md); }
+h3 { font-size: var(--pl-text-heading-sm); }
+
+p { max-width: var(--pl-measure); }
+
+/* Bloqueo del nombre de marca.
+   "STUDIO" nunca supera a "PARALLEL" en peso ni en tamano. */
+.pl-wordmark {
+  font-family: var(--pl-font-display);
+  font-weight: var(--pl-weight-display);
+  text-transform: uppercase;
+  letter-spacing: var(--pl-tracking-brand);
+  color: var(--pl-color-text);
+  font-synthesis: none;
+}
+
+.pl-wordmark__descriptor {
+  font-family: var(--pl-font-text);
+  font-weight: var(--pl-weight-regular);
+  font-size: 0.42em;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--pl-color-text-secondary);
+}
+
+/* Dato tecnico: numero en display, unidad en texto al ~60% */
+.pl-metric {
+  font-family: var(--pl-font-display);
+  font-size: var(--pl-text-display-md);
+  line-height: var(--pl-leading-display);
+  color: var(--pl-color-text);
+}
+
+.pl-metric__unit {
+  font-family: var(--pl-font-text);
+  font-size: 0.6em;
+  letter-spacing: var(--pl-tracking-caps);
+  color: var(--pl-color-text-secondary);
+}
+
+/* Acento. Un unico elemento por pieza. */
+.pl-accent { color: var(--pl-color-accent); }
+
+.pl-accent-bg {
+  background: var(--pl-color-accent);
+  color: var(--pl-color-text-on-accent);
+}
+
+.pl-gradient-text {
+  background: var(--pl-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glow: solo sobre fondo negro, solo en isotipo / recurso / dato. */
+.pl-glow { filter: drop-shadow(0 0 12px rgba(var(--pl-red-rgb), 0.45))
+                   drop-shadow(0 0 48px rgba(var(--pl-deep-rgb), 0.25)); }
+
+/* Recurso grafico: lineas paralelas.
+   Verticales u horizontales. Nunca diagonales ni curvas.
+   Un unico bloque de textura por pieza. */
+.pl-lines {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--pl-line) 0 2px,
+    transparent 2px 12px
+  );
+}
+
+.pl-lines--horizontal {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--pl-line) 0 2px,
+    transparent 2px 12px
+  );
+}
+
+.pl-container {
+  max-width: var(--pl-content-max);
+  margin-inline: auto;
+  padding-inline: var(--pl-margin);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

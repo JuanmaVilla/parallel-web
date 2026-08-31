@@ -1,0 +1,758 @@
+{
+  "_convention": "Las claves llamadas headline, heading, display, eyebrow o metric se componen en Lastica, que NO tiene tildes ni enie. En es.json esos valores deben ser ASCII puro. Lo verifica scripts/lint-headlines.mjs. Todo el resto va en Proxima Nova, donde los acentos son seguros.",
+  "meta": {
+    "title": "Parallel Studios — Mezcla, mastering y producción musical",
+    "description": "Estudio de producción musical en Buenos Aires. Mezcla, mastering, tratamiento vocal y beats para artistas emergentes, canción por canción.",
+    "ogLabel": "MEZCLA Y MASTERING",
+    "pages": {
+      "services": {
+        "title": "Servicios y precios",
+        "description": "Mezcla, mastering, tratamiento vocal y beats. Qué incluye cada paquete, cuánto sale y cómo trabajamos tu tema."
+      },
+      "about": {
+        "title": "Nosotros",
+        "description": "Pedro e Ian, productores. De dónde salió Parallel, cómo grabamos y por qué trabajamos canción por canción."
+      },
+      "contact": {
+        "title": "Contacto",
+        "description": "Mandanos tu tema y te decimos qué se puede hacer. WhatsApp, mail o el formulario del estudio."
+      },
+      "landing": {
+        "title": "Mezcla y mastering para artistas independientes",
+        "description": "Mezclamos y masterizamos tu tema hasta que compita en plataformas. Servicios, precios y ejemplos en una sola página."
+      },
+      "legalNotice": {
+        "title": "Aviso legal",
+        "description": "Titular del sitio, condiciones de uso, propiedad intelectual y ley aplicable."
+      },
+      "privacy": {
+        "title": "Política de privacidad",
+        "description": "Qué datos personales recogemos, para qué los usamos, cuánto los conservamos y cómo ejercer tus derechos."
+      },
+      "cookies": {
+        "title": "Política de cookies",
+        "description": "Este sitio usa una sola cookie técnica. Qué guarda, cuánto dura y cómo desactivarla."
+      }
+    }
+  },
+  "nav": {
+    "primary": "Navegación principal",
+    "skipToContent": "Ir al contenido",
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "cta": "Escribinos",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "legal": {
+      "notice": "Aviso legal",
+      "privacy": "Política de privacidad",
+      "cookies": "Política de cookies"
+    }
+  },
+  "whatsapp": {
+    "aria": "Escribinos por WhatsApp",
+    "message": "Hola! Tengo un tema y quiero saber qué pueden hacer con él."
+  },
+  "social": {
+    "instagram": "Seguinos en Instagram",
+    "whatsapp": "Escribinos por WhatsApp",
+    "email": "Escribinos por mail"
+  },
+  "home": {
+    "eyebrow": "ESTUDIO DE PRODUCCION MUSICAL EN BUENOS AIRES",
+    "headline": "TU TEMA, MEZCLADO",
+    "subhead": "Mezclamos y masterizamos tu tema hasta que compita en plataformas. Trabajamos canción por canción, con criterio técnico y sin humo.",
+    "ctaPrimary": "Ver paquetes",
+    "ctaSecondary": "Escuchá una muestra",
+    "services": {
+      "eyebrow": "PAQUETES",
+      "heading": "ELEGÍ POR DÓNDE",
+      "subhead": "Tres formas de trabajar. Si no sabés cuál te sirve, mandanos el tema y te lo decimos.",
+      "items": [
+        {
+          "heading": "MEZCLA",
+          "body": "Ordenamos el tema: cada instrumento en su lugar, la voz adelante y la dinámica intacta.",
+          "features": [
+            "Limpieza, EQ y compresión",
+            "De-esser, reverb y delay",
+            "1 o 2 revisiones incluidas"
+          ],
+          "priceFrom": "Desde",
+          "price": "$15.000 ARS",
+          "priceAlt": "USD 15"
+        },
+        {
+          "heading": "MASTERING",
+          "body": "El paso final. Volumen competitivo y traducción pareja en auriculares, auto y parlantes.",
+          "features": [
+            "Volumen final competitivo",
+            "Traducción pareja en todo sistema",
+            "Entrega lista para plataformas"
+          ],
+          "priceFrom": "Desde",
+          "price": "$10.000 ARS",
+          "priceAlt": "USD 10"
+        },
+        {
+          "heading": "MEZCLA + MASTERING",
+          "body": "El tema resuelto de punta a punta. Es lo que elige la mayoría de los artistas.",
+          "features": [
+            "Todo lo de mezcla, más el master",
+            "Afinación y automatizaciones",
+            "Hasta 5 revisiones según el plan"
+          ],
+          "priceFrom": "Desde",
+          "price": "$25.000 ARS",
+          "priceAlt": "USD 25",
+          "featured": true
+        }
+      ],
+      "launchNote": "Precios de lanzamiento. Valores en pesos argentinos, con equivalente en dólares para el exterior.",
+      "cta": "Ver todos los paquetes",
+      "headingAccent": "EMPEZAR",
+      "badge": "EL MAS ELEGIDO",
+      "itemCta": "Ver detalle"
+    },
+    "why": {
+      "eyebrow": "POR QUE PARALLEL",
+      "heading": "EL SONIDO NO DEBERÍA SER",
+      "headingAccent": "EL LÍMITE",
+      "subhead": "Hay artistas con grandes canciones que no llegan a sonar como imaginan. No porque les falte talento, sino porque les faltan recursos, conocimiento o alguien que los ayude a llevarlas más lejos.",
+      "points": [
+        {
+          "heading": "LLEVAMOS TU SONIDO AL SIGUIENTE NIVEL",
+          "body": "Mezclamos canciones de artistas emergentes con un sonido moderno, limpio, dinámico y emocional. No buscamos que tu canción suene como todas: buscamos que suene como vos."
+        },
+        {
+          "heading": "UN PUENTE PARA ARTISTAS INDEPENDIENTES",
+          "body": "No necesitás tener sello, estudio propio ni saber mezclar. Si tenés una canción y algo que decir, nosotros nos encargamos del resto."
+        },
+        {
+          "heading": "SIN INTERMEDIARIOS, DE ARTISTA A ARTISTA",
+          "body": "Hablás directamente con quien trabaja tu canción. Entendemos lo que querés transmitir, trabajamos sobre eso y te acompañamos durante el proceso."
+        }
+      ],
+      "punchline": "Parallel nace para cerrar esa brecha.",
+      "cta": "Mandanos tu tema"
+    },
+    "beforeAfter": {
+      "eyebrow": "ANTES / DESPUES",
+      "heading": "LA DIFERENCIA",
+      "subhead": "Dos masters terminados, tal cual se entregan. El antes de cada tema lo subimos cuando lo tengamos.",
+      "items": [
+        {
+          "slug": "columbia",
+          "heading": "TEMA 01",
+          "body": "Voz tapada por el beat"
+        },
+        {
+          "slug": "klousfrens",
+          "heading": "TEMA 02",
+          "body": "Mezcla sin cuerpo ni aire"
+        },
+        {
+          "heading": "TEMA 03",
+          "body": "Master sin volumen competitivo"
+        }
+      ],
+      "cta": "Ver todos los trabajos",
+      "headingAccent": "SE ESCUCHA",
+      "before": "ANTES",
+      "after": "DESPUÉS",
+      "pending": "Audio pendiente de carga"
+    },
+    "faq": {
+      "eyebrow": "PREGUNTAS FRECUENTES",
+      "heading": "ANTES DE ESCRIBIRNOS",
+      "headingAccent": "LEÉ ESTO",
+      "items": [
+        {
+          "question": "¿Qué necesito para mandarte mi tema?",
+          "answer": "Stems separados, en 24 bit / 48 kHz, sin clipping y con una referencia de cómo te gustaría que suene. Si te falta algo, mandalo igual y lo vemos."
+        },
+        {
+          "question": "¿Y si grabé todo en el celular o no tengo stems?",
+          "answer": "Escribinos igual. Se puede trabajar con menos: no es un requisito excluyente, es lo ideal."
+        },
+        {
+          "question": "¿Cuántas revisiones incluye?",
+          "answer": "Depende del paquete: 1 o 2 en mezcla, y hasta 5 en mezcla más mastering. Te decimos el número exacto antes de arrancar."
+        },
+        {
+          "question": "¿Cuánto cuesta?",
+          "answer": "Mezcla desde $15.000 ARS, mastering desde $10.000 ARS, y mezcla + mastering desde $25.000 ARS. Precios de lanzamiento, con equivalente en dólares para el exterior."
+        },
+        {
+          "question": "¿Necesito sello o estudio propio?",
+          "answer": "No. Si tenés una canción y algo que decir, nosotros nos encargamos del resto."
+        },
+        {
+          "question": "¿Cómo es el proceso de trabajo?",
+          "answer": "Nos mandás los stems, mezclamos y te enviamos una v1 para tu devolución, y aplicamos el master final con los WAV listos para plataformas."
+        },
+        {
+          "question": "¿Hablo directamente con quien mezcla mi canción?",
+          "answer": "Sí. Sin intermediarios: hablás con quien trabaja tu tema, de artista a artista."
+        }
+      ]
+    },
+    "leadForm": {
+      "eyebrow": "MANDANOS TU TEMA",
+      "heading": "CONTAME QUÉ TENÉS",
+      "headingAccent": "Y ARRANCAMOS",
+      "subhead": "Cuatro datos y listo. Lo escuchamos y te decimos qué se puede hacer, sin compromiso."
+    },
+    "headlineAccent": "Y MASTERIZADO",
+    "process": {
+      "eyebrow": "PROCESO",
+      "heading": "Cómo trabajamos tu tema",
+      "subhead": "Un proceso simple y directo para llevar tu canción desde las pistas originales hasta un master listo para sonar.",
+      "steps": [
+        {
+          "icon": "upload",
+          "metric": "01",
+          "heading": "Envío de stems",
+          "body": "Nos enviás las pistas exportadas desde el minuto cero, organizadas y sin efectos. Nosotros preparamos todo para arrancar."
+        },
+        {
+          "icon": "levels",
+          "metric": "02",
+          "heading": "Mezcla y revisión",
+          "body": "Trabajamos cada elemento del tema para lograr un sonido limpio y dinámico. Te enviamos una v1 para que nos des tu devolución."
+        },
+        {
+          "icon": "check",
+          "metric": "03",
+          "heading": "Master final",
+          "body": "Aplicamos el master final: volumen e impacto para competir con los lanzamientos actuales. Te entregamos los WAV finales."
+        }
+      ],
+      "cta": "Arrancá por el paso 1"
+    },
+    "chapter": {
+      "marks": [
+        {
+          "label": "MEZCLA"
+        },
+        {
+          "label": "MASTERING"
+        },
+        {
+          "label": "BEATS"
+        },
+        {
+          "label": "VOZ"
+        },
+        {
+          "label": "PARALLEL"
+        }
+      ]
+    },
+    "room": {
+      "ceiling": [
+        "PARALLEL",
+        "STUDIOS"
+      ],
+      "left": [
+        "TUS",
+        "IDEAS"
+      ],
+      "right": [
+        "TU",
+        "SONIDO"
+      ],
+      "floor": [
+        "MEZCLA",
+        "Y MASTER"
+      ]
+    },
+    "stack": {
+      "eyebrow": "QUE VAS A TENER",
+      "lead": "Traé la idea. El resto lo hacemos nosotros.",
+      "lines": [
+        {
+          "title": "La escribiste. La cantaste mil veces."
+        },
+        {
+          "title": "Falta una sola cosa."
+        },
+        {
+          "title": "Escucharla como la tenés en la cabeza."
+        },
+        {
+          "title": "¡De eso nos encargamos nosotros!"
+        }
+      ]
+    },
+    "disc": {
+      "eyebrow": "MASTER FINAL",
+      "heading": "NO ES TU CANCIÓN.",
+      "headingAccent": "ES EL MASTER",
+      "subhead": "Ponela en la misma playlist que tu artista favorito. Si la tuya suena más bajo, más chica y más lejos, no te falta talento. Te falta el último paso.",
+      "priceCta": "Ver todos los precios",
+      "cta": "Escuchá una muestra"
+    },
+    "cards": {
+      "heading": "Mezcla, mastering y beats",
+      "hint": "(SCROLL PARA EXPLORAR)",
+      "open": "Ver detalle",
+      "close": "Volver",
+      "items": [
+        {
+          "title": "Mezcla profesional",
+          "body": "Equilibrio frecuencial, dinámica controlada y profundidad espacial. Cada elemento en su lugar, empujando la canción.",
+          "details": [
+            "Limpieza, EQ y compresión",
+            "De-esser, reverb y delay",
+            "Automatizaciones de voz",
+            "1 o 2 revisiones incluidas"
+          ]
+        },
+        {
+          "title": "Mastering",
+          "body": "El paso final. Volumen competitivo y traducción pareja en auriculares, auto y parlantes.",
+          "details": [
+            "Volumen final competitivo",
+            "Traducción pareja en todo sistema",
+            "Entrega lista para plataformas",
+            "WAV y MP3 finales"
+          ]
+        },
+        {
+          "title": "Tratamiento vocal",
+          "body": "Afinación transparente, compresión agresiva y efectos espaciales modernos. La voz adelante, sin sonar procesada.",
+          "details": [
+            "Afinación transparente",
+            "Compresión en serie",
+            "Delays y reverbs de carácter",
+            "De-esser y limpieza de tomas"
+          ]
+        },
+        {
+          "title": "Producción de beats",
+          "body": "Construimos la instrumental sobre tu idea, o te damos beats exclusivos listos para grabar encima.",
+          "details": [
+            "Instrumental sobre tu idea",
+            "Beats exclusivos",
+            "Stems separados",
+            "Sesión abierta para cambios"
+          ]
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "QUIENES SOMOS",
+      "heading": "Hecho por artistas",
+      "paragraph1": "Somos <b>Pedro e Ian</b>, productores, no una agencia. Grabamos desde casa y vivimos metidos en la música que después vas a escuchar vos. Sabemos lo que cuesta encontrar tu sonido — nos pasa a nosotros también.",
+      "paragraph2": "<b>Con Parallel encontrás ese sonido que venís buscando hace rato.</b> Nuestra prioridad es una sola: que tu tema compita con lo que escuchás todos los días.",
+      "punchline": "Estás a una canción de escucharte como siempre quisiste.",
+      "photoAlt": "Los dos productores de Parallel Studios",
+      "cta": "Conocenos"
+    }
+  },
+  "form": {
+    "name": "Nombre",
+    "namePlaceholder": "Cómo te llamamos",
+    "email": "Mail",
+    "emailPlaceholder": "tu@mail.com",
+    "phone": "WhatsApp (opcional)",
+    "phonePlaceholder": "+54 9 11 xxxx xxxx",
+    "message": "Contanos de tu tema",
+    "messagePlaceholder": "Qué necesitás: mezcla, mastering, beats, tratamiento vocal...",
+    "submit": "Mandar",
+    "submitting": "Enviando",
+    "successHeading": "Listo, lo recibimos",
+    "successBody": "Lo escuchamos y te contestamos apenas tengamos una devolución.",
+    "errorMessage": "No se pudo enviar. Probá de nuevo o escribinos por WhatsApp.",
+    "retry": "Reintentar"
+  },
+  "services": {
+    "mixCraft": {
+      "heading": "El arte de la mezcla",
+      "lead": "Tu voz está tapada por el beat.",
+      "leadStrong": "Eso se arregla.",
+      "items": [
+        {
+          "label": "COMPRESION PARALELA",
+          "body": "Le damos grosor y punch a tus batas o a tu voz sin matar la dinámica original. Usamos ruteo avanzado para que todo suene inmenso pero natural.",
+          "wide": true,
+          "tags": [
+            "Punch",
+            "Dinámica"
+          ]
+        },
+        {
+          "label": "EQ QUIRURGICA",
+          "body": "Limpiamos las frecuencias que embarran el mix. Hacemos espacio para que cada elemento brille en su propio lugar."
+        },
+        {
+          "label": "AFINACION VOCAL",
+          "body": "Desde correcciones transparentes hasta efectos de autotune agresivos, según lo pida el track."
+        },
+        {
+          "label": "STAGE Y PROFUNDIDAD",
+          "body": "Trabajamos el paneo, las reverbs y los delays para crear una imagen estéreo tridimensional. Tu tema no va a sonar chato nunca más.",
+          "wide": true
+        }
+      ]
+    },
+    "masteringDeep": {
+      "heading": "Mastering final",
+      "body": "Cadena de mastering con referencia A/B contra tu track favorito. El volumen competitivo sin destrozar tu música.",
+      "imageAlt": "Cantante con auriculares frente al microfono en la cabina del estudio, a contraluz",
+      "points": [
+        {
+          "icon": "tickCircle",
+          "body": "Optimización de LUFS para Spotify, Apple Music y YouTube."
+        },
+        {
+          "icon": "levels",
+          "body": "Balance tonal final y ensanchamiento estéreo."
+        },
+        {
+          "icon": "speaker",
+          "body": "Limitación transparente para máximo impacto."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Estudio de mezcla, mastering y producción musical. Trabajamos canción por canción, con artistas independientes.",
+    "navLabel": "NAVEGACION",
+    "contactLabel": "CONTACTO",
+    "location": "Estudio de producción musical en Buenos Aires, Argentina.",
+    "rights": "Todos los derechos reservados.",
+    "creditPrefix": "Página creada por",
+    "legalLabel": "Legal"
+  },
+  "cta": {
+    "giantLabel": "PARALLEL",
+    "eyebrow": "PROXIMO PASO",
+    "heading": "TU TEMA YA ESTÁ. FALTA CÓMO SUENA",
+    "subhead": "Mandanos lo que tengas, aunque esté a medio terminar. Lo escuchamos y te decimos qué se puede hacer.",
+    "primary": "Escribinos",
+    "secondary": "Ver servicios"
+  },
+  "pages": {
+    "services": {
+      "eyebrow": "SERVICIOS Y PRECIOS",
+      "heading": "TODO LO QUE LE",
+      "headingAccent": "HACEMOS A TU TEMA",
+      "subhead": "Mezcla, mastering, tratamiento vocal y beats. Acá está el detalle de cada cosa y lo que cuesta, sin letra chica.",
+      "ctaPrimary": "Ver paquetes",
+      "ctaSecondary": "Mandanos tu tema",
+      "cta": {
+        "giantLabel": "PARALLEL",
+        "eyebrow": "EMPEZA POR ACA",
+        "heading": "MANDANOS EL TEMA Y LO ESCUCHAMOS",
+        "subhead": "Te decimos por dónde lo agarramos y cuánto sale antes de que pagues nada.",
+        "primary": "Escribinos",
+        "secondary": "Conocenos"
+      }
+    },
+    "about": {
+      "eyebrow": "QUIENES SOMOS",
+      "heading": "DOS PRODUCTORES",
+      "headingAccent": "HACIENDO DISCOS",
+      "subhead": "Quiénes somos, cómo trabajamos y con quién vas a hablar cuando nos mandes el tema.",
+      "ctaPrimary": "Mandanos tu tema",
+      "ctaSecondary": "Ver servicios",
+      "cta": {
+        "giantLabel": "PARALLEL",
+        "eyebrow": "HABLEMOS",
+        "heading": "CONTANOS EN QUÉ ANDÁS",
+        "subhead": "Escuchamos el tema y te contamos qué se puede hacer con él.",
+        "primary": "Escribinos",
+        "secondary": "Ver servicios"
+      }
+    },
+    "contact": {
+      "eyebrow": "CONTACTO",
+      "heading": "MANDANOS TU TEMA",
+      "headingAccent": "Y ARRANCAMOS",
+      "subhead": "Cuatro datos y listo. Lo escuchamos y te decimos qué se puede hacer, sin compromiso."
+    }
+  },
+  "about": {
+    "team": {
+      "eyebrow": "EL EQUIPO",
+      "heading": "Quién es quién",
+      "subhead": "Somos dos. Los dos escuchamos tu tema, y el que lo trabaja es el que te contesta.",
+      "members": [
+        {
+          "name": "Pedro",
+          "roleLabel": "MEZCLA Y PRODUCCION",
+          "bio": "Arranca por el balance: que la voz entre sin pelear con el beat. Se ocupa de la mezcla y de las decisiones de arreglo que la hacen más fácil.",
+          "photo": "pedro",
+          "alt": "Pedro, productor de Parallel Studios, en el estudio"
+        },
+        {
+          "name": "Ian",
+          "roleLabel": "MASTERING Y BEATS",
+          "bio": "Cierra los temas y los deja al nivel de las plataformas. También produce los beats cuando la canción arranca de cero.",
+          "photo": "ian",
+          "alt": "Ian, productor de Parallel Studios, en el estudio"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "channels": {
+      "whatsappLabel": "WHATSAPP",
+      "whatsappValue": "Escribinos por WhatsApp",
+      "whatsappMessage": "Hola! Tengo un tema y quiero saber qué pueden hacer con él.",
+      "emailLabel": "MAIL",
+      "instagramLabel": "INSTAGRAM",
+      "studioLabel": "ESTUDIO",
+      "studioValue": "Buenos Aires, Argentina. Trabajamos a distancia con artistas del país y del exterior.",
+      "hoursLabel": "HORARIOS",
+      "hoursValue": "Lunes a viernes, de 10 a 20 h",
+      "note": "Contestamos dentro de las 24 horas hábiles. Si nos escribís por WhatsApp o por mail, sumá un link de descarga del tema: WeTransfer, Drive o Dropbox."
+    }
+  },
+  "legal": {
+    "notice": {
+      "eyebrow": "AVISO LEGAL",
+      "heading": "Aviso legal",
+      "updated": "Última actualización:",
+      "intro": "Este documento regula el acceso y el uso de este sitio y de todos sus contenidos. Navegarlo implica aceptarlo. Si no estás de acuerdo con alguno de estos puntos, no lo uses.",
+      "data": {
+        "owner": "Titular",
+        "brand": "Nombre comercial",
+        "taxId": "CUIT",
+        "address": "Domicilio",
+        "email": "Contacto"
+      },
+      "sections": [
+        {
+          "heading": "Titular del sitio",
+          "body": [
+            "Los datos del responsable del sitio son los que figuran en el cuadro de arriba. Cualquier consulta sobre este aviso legal se puede hacer al mail indicado ahí."
+          ]
+        },
+        {
+          "heading": "Objeto y aceptación",
+          "body": [
+            "Este aviso regula el uso del sitio que el titular pone a disposición de los usuarios. Al navegarlo aceptás estas condiciones en la versión publicada al momento de tu visita.",
+            "El titular puede modificar en cualquier momento la presentación, la configuración y los contenidos del sitio, así como estas condiciones. La fecha de la última revisión figura arriba del todo."
+          ]
+        },
+        {
+          "heading": "Condiciones de uso",
+          "body": [
+            "Al usar el sitio te comprometés a:"
+          ],
+          "items": [
+            "Usarlo de buena fe y conforme a la ley.",
+            "No intentar acceder a áreas restringidas ni alterar o dañar su funcionamiento.",
+            "No usar el formulario para mandar contenido ilícito, publicidad no solicitada o software malicioso.",
+            "Responder por la veracidad de los datos que cargues en el formulario de contacto."
+          ]
+        },
+        {
+          "heading": "Propiedad intelectual",
+          "body": [
+            "Los textos, el diseño, las marcas, los logotipos, las fotografías y los archivos de audio publicados en el sitio pertenecen al titular o se usan con autorización. No está permitido reproducirlos, distribuirlos, comunicarlos públicamente ni transformarlos sin permiso escrito.",
+            "El material que un cliente entrega para trabajar —maquetas, pistas, stems, letras— sigue siendo del cliente. El estudio lo usa únicamente para prestar el servicio contratado, y no lo publica ni lo muestra como ejemplo sin autorización expresa."
+          ]
+        },
+        {
+          "heading": "Precios y contratación",
+          "body": [
+            "Los precios publicados están expresados en pesos argentinos, son valores «desde» y tienen carácter informativo: no constituyen una oferta vinculante. El precio final de cada trabajo se confirma por escrito antes de empezar, según el material y el alcance acordados.",
+            "El equivalente en dólares que acompaña a cada precio es una referencia de conversión para clientes del exterior, no una segunda lista de precios."
+          ]
+        },
+        {
+          "heading": "Responsabilidad",
+          "body": [
+            "El titular procura que el sitio esté disponible y que la información publicada sea correcta y esté actualizada, pero no puede garantizar que no haya interrupciones, demoras, errores u omisiones, ni responde por los daños que puedan derivarse de ellos.",
+            "El sitio contiene enlaces a servicios de terceros, como WhatsApp e Instagram. El titular no controla esos sitios ni responde por sus contenidos, su disponibilidad ni sus políticas de privacidad."
+          ]
+        },
+        {
+          "heading": "Nulidad parcial",
+          "body": [
+            "Si alguna cláusula de este aviso se declara nula o inaplicable, el resto sigue vigente y se interpreta respetando la finalidad original del documento."
+          ]
+        },
+        {
+          "heading": "Ley aplicable y jurisdicción",
+          "body": [
+            "Este aviso se rige por la ley argentina. Para cualquier controversia las partes se someten a los tribunales ordinarios de la Ciudad Autónoma de Buenos Aires, sin perjuicio del fuero que corresponda cuando el usuario revista la condición de consumidor conforme a la Ley 24.240 de Defensa del Consumidor."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "eyebrow": "POLITICA DE PRIVACIDAD",
+      "heading": "Política de privacidad",
+      "updated": "Última actualización:",
+      "intro": "Acá está qué datos personales recogemos, para qué los usamos, cuánto los guardamos y qué podés pedirnos sobre ellos.",
+      "sections": [
+        {
+          "heading": "Responsable del tratamiento",
+          "body": [
+            "El responsable es el titular del sitio, cuyos datos completos figuran en el aviso legal. Para cualquier cuestión relacionada con tus datos personales podés escribir al mail de contacto que aparece ahí."
+          ]
+        },
+        {
+          "heading": "Qué datos recogemos",
+          "body": [
+            "Recogemos únicamente lo que nos das o lo que el servidor registra para poder servirte el sitio:"
+          ],
+          "items": [
+            "Los que cargás en el formulario de contacto: nombre, mail, WhatsApp (opcional) y el mensaje que escribas.",
+            "Los que nos mandes por WhatsApp, mail o Instagram, incluidos los archivos de audio y los enlaces de descarga.",
+            "Datos técnicos que registra el servidor al servir cada página: dirección IP, tipo de navegador, fecha y hora, y página solicitada."
+          ]
+        },
+        {
+          "heading": "Qué NO recogemos",
+          "body": [
+            "No pedimos datos sensibles. No procesamos pagos en el sitio, así que nunca vas a cargar acá datos de tarjeta ni bancarios. Tampoco usamos analítica ni ninguna herramienta que siga tu navegación."
+          ]
+        },
+        {
+          "heading": "Para qué los usamos",
+          "items": [
+            "Responder tu consulta y armarte un presupuesto.",
+            "Prestar el servicio contratado y comunicarnos durante el trabajo.",
+            "Cumplir obligaciones legales, contables y fiscales."
+          ],
+          "body": [
+            "No usamos tus datos para publicidad, no te mandamos newsletter y no los vendemos ni los cedemos a terceros con fines comerciales."
+          ]
+        },
+        {
+          "heading": "Base legal",
+          "body": [
+            "El tratamiento se apoya en tu consentimiento, que das al mandarnos el formulario o al escribirnos por cualquiera de los canales, y en la ejecución del contrato cuando ya hay un trabajo en marcha. Se rige por la Ley 25.326 de Protección de los Datos Personales."
+          ]
+        },
+        {
+          "heading": "Cuánto tiempo los conservamos",
+          "body": [
+            "Las consultas que no derivan en un trabajo se conservan hasta un año desde el último contacto. Los datos de clientes se conservan mientras dure la relación y, después, durante los plazos que exijan las obligaciones fiscales y contables."
+          ]
+        },
+        {
+          "heading": "Con quién los compartimos",
+          "items": [
+            "El proveedor de alojamiento del sitio, que almacena los datos técnicos y los mensajes que llegan por el formulario.",
+            "El proveedor de correo electrónico con el que gestionamos las consultas.",
+            "Organismos públicos, cuando una norma lo exija."
+          ],
+          "body": [
+            "Estos proveedores actúan por cuenta nuestra y solo pueden tratar los datos para prestarnos su servicio."
+          ]
+        },
+        {
+          "heading": "Transferencias internacionales",
+          "body": [
+            "Algunos de esos proveedores alojan la información en servidores fuera de la Argentina. Cuando eso ocurre se contratan servicios que ofrecen un nivel de protección adecuado y se firman las cláusulas contractuales que correspondan."
+          ]
+        },
+        {
+          "heading": "Tus derechos",
+          "body": [
+            "Podés pedirnos en cualquier momento:"
+          ],
+          "items": [
+            "Acceder a los datos que tenemos sobre vos.",
+            "Rectificarlos o actualizarlos si están mal o cambiaron.",
+            "Suprimirlos, cuando no exista una obligación legal de conservarlos.",
+            "Retirar el consentimiento que diste, sin que eso afecte al tratamiento anterior."
+          ]
+        },
+        {
+          "heading": "Cómo ejercerlos",
+          "body": [
+            "Escribinos al mail de contacto del aviso legal diciendo qué necesitás. Te podemos pedir que acredites tu identidad antes de responder.",
+            "El titular de los datos tiene la facultad de ejercer el derecho de acceso en forma gratuita a intervalos no inferiores a seis meses, salvo que acredite un interés legítimo al efecto, conforme al artículo 14, inciso 3 de la Ley 25.326.",
+            "La Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales."
+          ]
+        },
+        {
+          "heading": "Menores de edad",
+          "body": [
+            "El sitio está dirigido a mayores de 18 años. Si sos menor, necesitás la autorización de tu madre, padre o tutor para contratar un servicio o para mandarnos tus datos."
+          ]
+        },
+        {
+          "heading": "Seguridad",
+          "body": [
+            "Aplicamos medidas técnicas y organizativas razonables para proteger la información. Ningún sistema es infalible: si detectamos un incidente que afecte a tus datos, te lo comunicamos y damos aviso a la autoridad cuando corresponda."
+          ]
+        },
+        {
+          "heading": "Cambios en esta política",
+          "body": [
+            "Si cambiamos la forma de tratar los datos, actualizamos este documento y la fecha del encabezado. Conviene revisarlo cada tanto."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "eyebrow": "POLITICA DE COOKIES",
+      "heading": "Política de cookies",
+      "updated": "Última actualización:",
+      "intro": "Este sitio usa una sola cookie, y es técnica. No hay analítica, no hay publicidad y no hay pixeles de redes sociales: por eso tampoco vas a ver un banner pidiéndote permiso.",
+      "table": {
+        "name": "Nombre",
+        "owner": "Titular",
+        "purpose": "Finalidad",
+        "duration": "Duración",
+        "locale": {
+          "owner": "Propia",
+          "purpose": "Recuerda en qué idioma estás navegando para servirte la versión correcta de cada página.",
+          "duration": "De sesión: el navegador la borra al cerrarse."
+        }
+      },
+      "sections": [
+        {
+          "heading": "Qué es una cookie",
+          "body": [
+            "Es un archivo chico que un sitio guarda en tu navegador cuando lo visitás, y que le permite recordar algo entre una página y la siguiente. Las hay técnicas —necesarias para que el sitio funcione— y las hay de análisis o de publicidad, que sirven para medirte o perfilarte."
+          ]
+        },
+        {
+          "heading": "Qué cookie usa este sitio",
+          "body": [
+            "La del cuadro de arriba, y ninguna más. Es una cookie técnica: guarda en qué idioma estás navegando para que las páginas siguientes te lleguen en ese idioma. No permite identificarte, no guarda datos personales y no se comparte con nadie."
+          ]
+        },
+        {
+          "heading": "Qué no usa",
+          "items": [
+            "Cookies de analítica o de medición de audiencia.",
+            "Cookies de publicidad, remarketing o perfilado.",
+            "Botones incrustados ni pixeles de redes sociales.",
+            "Venta o cesión de datos de navegación a terceros."
+          ]
+        },
+        {
+          "heading": "Servicios de terceros",
+          "body": [
+            "Las tipografías del sitio se cargan desde Adobe Fonts (Adobe Inc.). Ese servicio no instala cookies en este dominio, pero al pedir el archivo tu navegador le envía datos técnicos como la dirección IP y el tipo de navegador. Su política de privacidad está publicada en el sitio de Adobe.",
+            "Los enlaces a WhatsApp e Instagram te llevan fuera de este sitio. Lo que pase ahí se rige por las políticas de esas plataformas, no por esta."
+          ]
+        },
+        {
+          "heading": "Cómo desactivarlas",
+          "body": [
+            "Todos los navegadores permiten bloquear o borrar las cookies desde sus opciones de configuración o privacidad. Si bloqueás la de este sitio no se rompe nada: lo único que pasa es que deja de recordar tu idioma y en cada visita vas a ver el que detecte por defecto."
+          ]
+        },
+        {
+          "heading": "Cambios",
+          "body": [
+            "Si en el futuro sumamos alguna cookie, actualizamos este documento y la fecha del encabezado antes de instalarla."
+          ]
+        }
+      ]
+    }
+  }
+}

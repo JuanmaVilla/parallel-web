@@ -1,0 +1,758 @@
+{
+  "_convention": "Keys named headline, heading, display, eyebrow or metric render in Lastica, which has no accented glyphs. English is unaffected, but the ASCII rule is enforced here too for consistency.",
+  "meta": {
+    "title": "Parallel Studios — Mixing, mastering and music production",
+    "description": "Music production studio in Buenos Aires. Mixing, mastering, vocal treatment and beats for emerging and independent artists, track by track.",
+    "ogLabel": "MIXING AND MASTERING",
+    "pages": {
+      "services": {
+        "title": "Services and pricing",
+        "description": "Mixing, mastering, vocal treatment and beats. What each package includes, what it costs and how we work on your track."
+      },
+      "about": {
+        "title": "About us",
+        "description": "Pedro and Ian, producers. Where Parallel came from, how we record and why we work one song at a time."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Send us your track and we will tell you what can be done. WhatsApp, email or the studio form."
+      },
+      "landing": {
+        "title": "Mixing and mastering for independent artists",
+        "description": "We mix and master your track until it holds up on streaming. Services, pricing and examples on a single page."
+      },
+      "legalNotice": {
+        "title": "Legal notice",
+        "description": "Site owner, terms of use, intellectual property and applicable law."
+      },
+      "privacy": {
+        "title": "Privacy policy",
+        "description": "What personal data we collect, what we use it for, how long we keep it and how to exercise your rights."
+      },
+      "cookies": {
+        "title": "Cookie policy",
+        "description": "This site uses a single technical cookie. What it stores, how long it lasts and how to turn it off."
+      }
+    }
+  },
+  "nav": {
+    "primary": "Main navigation",
+    "skipToContent": "Skip to content",
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Get in touch",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "legal": {
+      "notice": "Legal notice",
+      "privacy": "Privacy policy",
+      "cookies": "Cookie policy"
+    }
+  },
+  "whatsapp": {
+    "aria": "Message us on WhatsApp",
+    "message": "Hi! I have a track and I'd like to know what you can do with it."
+  },
+  "social": {
+    "instagram": "Follow us on Instagram",
+    "whatsapp": "Message us on WhatsApp",
+    "email": "Email us"
+  },
+  "home": {
+    "eyebrow": "MUSIC PRODUCTION STUDIO IN BUENOS AIRES",
+    "headline": "YOUR TRACK, MIXED",
+    "subhead": "We mix and master your track until it competes on streaming platforms. Track by track, with technical judgement and no hype.",
+    "ctaPrimary": "See packages",
+    "ctaSecondary": "Hear a sample",
+    "services": {
+      "eyebrow": "PACKAGES",
+      "heading": "PICK WHERE",
+      "subhead": "Three ways to work with us. If you are not sure which one fits, send the track and we will tell you.",
+      "items": [
+        {
+          "heading": "MIXING",
+          "body": "We put the track in order: every instrument in its place, the vocal up front, the dynamics intact.",
+          "features": [
+            "Cleanup, EQ and compression",
+            "De-esser, reverb and delay",
+            "1 or 2 revisions included"
+          ],
+          "priceFrom": "From",
+          "price": "USD 15",
+          "priceAlt": "ARS 15,000"
+        },
+        {
+          "heading": "MASTERING",
+          "body": "The final step. Competitive loudness and even translation across headphones, car and speakers.",
+          "features": [
+            "Competitive final loudness",
+            "Even translation on any system",
+            "Delivery ready for platforms"
+          ],
+          "priceFrom": "From",
+          "price": "USD 10",
+          "priceAlt": "ARS 10,000"
+        },
+        {
+          "heading": "MIXING + MASTERING",
+          "body": "The track solved end to end. This is what most artists go for.",
+          "features": [
+            "Everything in mixing, plus the master",
+            "Tuning and automation",
+            "Up to 5 revisions depending on tier"
+          ],
+          "priceFrom": "From",
+          "price": "USD 25",
+          "priceAlt": "ARS 25,000",
+          "featured": true
+        }
+      ],
+      "launchNote": "Launch pricing. Listed in US dollars, with the Argentine peso equivalent for local clients.",
+      "cta": "See all packages",
+      "headingAccent": "TO START",
+      "badge": "MOST CHOSEN",
+      "itemCta": "See details"
+    },
+    "why": {
+      "eyebrow": "WHY PARALLEL",
+      "heading": "SOUND SHOULD NOT BE",
+      "headingAccent": "THE LIMIT",
+      "subhead": "There are artists with great songs that never end up sounding the way they imagined. Not because they lack talent, but because they lack resources, know-how, or someone to help take it further.",
+      "points": [
+        {
+          "heading": "WE TAKE YOUR SOUND FURTHER",
+          "body": "We mix emerging artists with a sound that is modern, clean, dynamic and emotional. We are not after a song that sounds like everyone else's — we want it to sound like you."
+        },
+        {
+          "heading": "A BRIDGE FOR INDEPENDENT ARTISTS",
+          "body": "You do not need a label, a studio of your own, or to know how to mix. If you have a song and something to say, we take care of the rest."
+        },
+        {
+          "heading": "NO MIDDLEMEN, ARTIST TO ARTIST",
+          "body": "You talk directly to whoever is working on your song. We understand what you want to get across, we work from that, and we stay with you through the process."
+        }
+      ],
+      "punchline": "Parallel exists to close that gap.",
+      "cta": "Send us your track"
+    },
+    "beforeAfter": {
+      "eyebrow": "BEFORE / AFTER",
+      "heading": "THE DIFFERENCE",
+      "subhead": "Two finished masters, exactly as they are delivered. The before of each track goes up once we have it.",
+      "items": [
+        {
+          "slug": "columbia",
+          "heading": "TRACK 01",
+          "body": "Vocal buried under the beat"
+        },
+        {
+          "slug": "klousfrens",
+          "heading": "TRACK 02",
+          "body": "Mix with no body and no air"
+        },
+        {
+          "heading": "TRACK 03",
+          "body": "Master without competitive loudness"
+        }
+      ],
+      "cta": "See all work",
+      "headingAccent": "IS HEARD",
+      "before": "BEFORE",
+      "after": "AFTER",
+      "pending": "Audio not uploaded yet"
+    },
+    "faq": {
+      "eyebrow": "FREQUENTLY ASKED",
+      "heading": "BEFORE YOU WRITE TO US",
+      "headingAccent": "READ THIS",
+      "items": [
+        {
+          "question": "What do I need to send you my track?",
+          "answer": "Separate stems, 24 bit / 48 kHz, no clipping, and a reference for how you'd like it to sound. Missing something? Send it anyway and we'll figure it out."
+        },
+        {
+          "question": "What if I recorded everything on my phone, or have no stems?",
+          "answer": "Write to us anyway. We can work with less: it's not a hard requirement, it's the ideal case."
+        },
+        {
+          "question": "How many revisions are included?",
+          "answer": "Depends on the package: 1 or 2 on mixing, up to 5 on mixing plus mastering. We tell you the exact number before we start."
+        },
+        {
+          "question": "How much does it cost?",
+          "answer": "Mixing from $15,000 ARS, mastering from $10,000 ARS, mixing + mastering from $25,000 ARS. Launch pricing, with a USD equivalent for clients abroad."
+        },
+        {
+          "question": "Do I need a label or my own studio?",
+          "answer": "No. If you have a song and something to say, we take care of the rest."
+        },
+        {
+          "question": "What does the process look like?",
+          "answer": "You send us the stems, we mix and send you a v1 for your notes, then we apply the final master with WAV files ready for platforms."
+        },
+        {
+          "question": "Do I talk directly with whoever mixes my song?",
+          "answer": "Yes. No middlemen: you talk to whoever is working on your track, artist to artist."
+        }
+      ]
+    },
+    "leadForm": {
+      "eyebrow": "SEND US YOUR TRACK",
+      "heading": "TELL US WHAT YOU HAVE",
+      "headingAccent": "AND WE START",
+      "subhead": "Four details and that's it. We'll listen and tell you what can be done, no commitment."
+    },
+    "headlineAccent": "AND MASTERED",
+    "process": {
+      "eyebrow": "PROCESS",
+      "heading": "How we work on your track",
+      "subhead": "A simple, direct process to take your song from the original tracks to a master ready to be heard.",
+      "steps": [
+        {
+          "icon": "upload",
+          "metric": "01",
+          "heading": "Send your stems",
+          "body": "You send us the tracks exported from bar zero, organized and with no effects. We get everything ready to start."
+        },
+        {
+          "icon": "levels",
+          "metric": "02",
+          "heading": "Mix and revision",
+          "body": "We work every element of the track to get a sound that's clean and dynamic. We send you v1 so you can give us notes."
+        },
+        {
+          "icon": "check",
+          "metric": "03",
+          "heading": "Final master",
+          "body": "We apply the final master: loudness and impact to compete with today's releases. We deliver the final WAV files."
+        }
+      ],
+      "cta": "Start with step 1"
+    },
+    "chapter": {
+      "marks": [
+        {
+          "label": "MIXING"
+        },
+        {
+          "label": "MASTERING"
+        },
+        {
+          "label": "BEATS"
+        },
+        {
+          "label": "VOCALS"
+        },
+        {
+          "label": "PARALLEL"
+        }
+      ]
+    },
+    "room": {
+      "ceiling": [
+        "PARALLEL",
+        "STUDIOS"
+      ],
+      "left": [
+        "YOUR",
+        "IDEAS"
+      ],
+      "right": [
+        "YOUR",
+        "SOUND"
+      ],
+      "floor": [
+        "MIX",
+        "AND MASTER"
+      ]
+    },
+    "stack": {
+      "eyebrow": "WHAT YOU LEAVE WITH",
+      "lead": "Bring the idea. We handle the rest.",
+      "lines": [
+        {
+          "title": "You wrote it. Sang it a thousand times."
+        },
+        {
+          "title": "One thing's missing."
+        },
+        {
+          "title": "Hearing it the way it sounds in your head."
+        },
+        {
+          "title": "That part is on us!"
+        }
+      ]
+    },
+    "disc": {
+      "eyebrow": "FINAL MASTER",
+      "heading": "IT'S NOT YOUR SONG.",
+      "headingAccent": "IT'S THE MASTER",
+      "subhead": "Put it in the same playlist as your favourite artist. If yours sounds quieter, smaller and further away, you're not short on talent. You're short one step.",
+      "priceCta": "See all pricing",
+      "cta": "Hear a sample"
+    },
+    "cards": {
+      "heading": "Mixing, mastering and beats",
+      "hint": "(SCROLL TO EXPLORE)",
+      "open": "See detail",
+      "close": "Back",
+      "items": [
+        {
+          "title": "Professional mixing",
+          "body": "Frequency balance, controlled dynamics and spatial depth. Every element in its place, pushing the song.",
+          "details": [
+            "Cleanup, EQ and compression",
+            "De-esser, reverb and delay",
+            "Vocal automation",
+            "1 or 2 revisions included"
+          ]
+        },
+        {
+          "title": "Mastering",
+          "body": "The final step. Competitive loudness and even translation on headphones, car and speakers.",
+          "details": [
+            "Competitive final loudness",
+            "Even translation on any system",
+            "Platform-ready delivery",
+            "Final WAV and MP3"
+          ]
+        },
+        {
+          "title": "Vocal treatment",
+          "body": "Transparent tuning, aggressive compression and modern spatial effects. Vocals up front, without sounding processed.",
+          "details": [
+            "Transparent tuning",
+            "Serial compression",
+            "Delays and reverbs with character",
+            "De-esser and take cleanup"
+          ]
+        },
+        {
+          "title": "Beat production",
+          "body": "We build the instrumental around your idea, or hand you exclusive beats ready to record on.",
+          "details": [
+            "Instrumental from your idea",
+            "Exclusive beats",
+            "Separated stems",
+            "Session open for changes"
+          ]
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "WHO WE ARE",
+      "heading": "Made by artists",
+      "paragraph1": "We're <b>Pedro and Ian</b>, producers, not an agency. We record from home and live inside the music you're about to hear. We know what it costs to find your sound — it costs us too.",
+      "paragraph2": "<b>With Parallel you find the sound you've been chasing.</b> We only have one priority: your track holding up against whatever you're already listening to.",
+      "punchline": "You're one song away from finally hearing yourself the way you always meant to.",
+      "photoAlt": "The two producers behind Parallel Studios",
+      "cta": "Meet the studio"
+    }
+  },
+  "form": {
+    "name": "Name",
+    "namePlaceholder": "What should we call you",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "phone": "WhatsApp (optional)",
+    "phonePlaceholder": "+1 555 000 0000",
+    "message": "Tell us about your track",
+    "messagePlaceholder": "What you need: mixing, mastering, beats, vocal work...",
+    "submit": "Send",
+    "submitting": "Sending",
+    "successHeading": "Got it, thanks",
+    "successBody": "We'll listen and get back to you with notes.",
+    "errorMessage": "Couldn't send it. Try again or message us on WhatsApp.",
+    "retry": "Retry"
+  },
+  "services": {
+    "mixCraft": {
+      "heading": "The craft of mixing",
+      "lead": "Your vocal is buried under the beat.",
+      "leadStrong": "That gets fixed.",
+      "items": [
+        {
+          "label": "PARALLEL COMPRESSION",
+          "body": "We give your drums or your vocal weight and punch without killing the original dynamics. Advanced routing so everything sounds huge but natural.",
+          "wide": true,
+          "tags": [
+            "Punch",
+            "Dynamics"
+          ]
+        },
+        {
+          "label": "SURGICAL EQ",
+          "body": "We clear the frequencies muddying the mix, and make room for every element to shine in its own place."
+        },
+        {
+          "label": "VOCAL TUNING",
+          "body": "From transparent correction to aggressive autotune effects, depending on what the track asks for."
+        },
+        {
+          "label": "STAGE AND DEPTH",
+          "body": "We work panning, reverbs and delays into a three-dimensional stereo image. Your track will never sound flat again.",
+          "wide": true
+        }
+      ]
+    },
+    "masteringDeep": {
+      "heading": "Final mastering",
+      "body": "A mastering chain with an A/B reference against your favourite track. Competitive loudness without destroying your music.",
+      "imageAlt": "Singer wearing headphones at the microphone in the studio booth, backlit",
+      "points": [
+        {
+          "icon": "tickCircle",
+          "body": "LUFS optimisation for Spotify, Apple Music and YouTube."
+        },
+        {
+          "icon": "levels",
+          "body": "Final tonal balance and stereo widening."
+        },
+        {
+          "icon": "speaker",
+          "body": "Transparent limiting for maximum impact."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Mixing, mastering and music production studio. We work one song at a time, with independent artists.",
+    "navLabel": "NAVIGATION",
+    "contactLabel": "CONTACT",
+    "location": "Music production studio in Buenos Aires, Argentina.",
+    "rights": "All rights reserved.",
+    "creditPrefix": "Site built by",
+    "legalLabel": "Legal"
+  },
+  "cta": {
+    "giantLabel": "PARALLEL",
+    "eyebrow": "NEXT STEP",
+    "heading": "THE SONG IS THERE. THE SOUND IS WHAT'S MISSING",
+    "subhead": "Send us what you have, even half-finished. We listen to it and tell you what can be done.",
+    "primary": "Get in touch",
+    "secondary": "See services"
+  },
+  "pages": {
+    "services": {
+      "eyebrow": "SERVICES AND PRICING",
+      "heading": "EVERYTHING WE DO",
+      "headingAccent": "TO YOUR TRACK",
+      "subhead": "Mixing, mastering, vocal treatment and beats. Here is the detail of each one and what it costs, no fine print.",
+      "ctaPrimary": "See packages",
+      "ctaSecondary": "Send us your track",
+      "cta": {
+        "giantLabel": "PARALLEL",
+        "eyebrow": "START HERE",
+        "heading": "SEND THE TRACK AND WE WILL LISTEN",
+        "subhead": "We tell you how we would approach it and what it costs before you pay anything.",
+        "primary": "Get in touch",
+        "secondary": "Meet the studio"
+      }
+    },
+    "about": {
+      "eyebrow": "WHO WE ARE",
+      "heading": "TWO PRODUCERS",
+      "headingAccent": "MAKING RECORDS",
+      "subhead": "Who we are, how we work and who you will be talking to when you send us your track.",
+      "ctaPrimary": "Send us your track",
+      "ctaSecondary": "See services",
+      "cta": {
+        "giantLabel": "PARALLEL",
+        "eyebrow": "LET'S TALK",
+        "heading": "TELL US WHAT YOU ARE WORKING ON",
+        "subhead": "We listen to the track and tell you what can be done with it.",
+        "primary": "Get in touch",
+        "secondary": "See services"
+      }
+    },
+    "contact": {
+      "eyebrow": "CONTACT",
+      "heading": "SEND US YOUR TRACK",
+      "headingAccent": "AND WE START",
+      "subhead": "Four fields and done. We listen to it and tell you what can be done, no strings attached."
+    }
+  },
+  "about": {
+    "team": {
+      "eyebrow": "THE TEAM",
+      "heading": "Who does what",
+      "subhead": "There are two of us. We both listen to your track, and whoever works on it is who answers you.",
+      "members": [
+        {
+          "name": "Pedro",
+          "roleLabel": "MIXING AND PRODUCTION",
+          "bio": "He starts with balance: the vocal has to sit without fighting the beat. He handles the mix and the arrangement calls that make it easier.",
+          "photo": "pedro",
+          "alt": "Pedro, producer at Parallel Studios, in the studio"
+        },
+        {
+          "name": "Ian",
+          "roleLabel": "MASTERING AND BEATS",
+          "bio": "He closes the tracks and brings them up to streaming level. He also produces the beats when a song starts from scratch.",
+          "photo": "ian",
+          "alt": "Ian, producer at Parallel Studios, in the studio"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "channels": {
+      "whatsappLabel": "WHATSAPP",
+      "whatsappValue": "Message us on WhatsApp",
+      "whatsappMessage": "Hi! I have a track and I want to know what you can do with it.",
+      "emailLabel": "EMAIL",
+      "instagramLabel": "INSTAGRAM",
+      "studioLabel": "STUDIO",
+      "studioValue": "Buenos Aires, Argentina. We work remotely with artists here and abroad.",
+      "hoursLabel": "HOURS",
+      "hoursValue": "Monday to Friday, 10am to 8pm",
+      "note": "We answer within 24 business hours. If you write on WhatsApp or by email, add a download link for the track: WeTransfer, Drive or Dropbox."
+    }
+  },
+  "legal": {
+    "notice": {
+      "eyebrow": "LEGAL NOTICE",
+      "heading": "Legal notice",
+      "updated": "Last updated:",
+      "intro": "This document governs access to and use of this site and all of its content. Browsing it means accepting these terms. If you disagree with any of them, do not use the site.",
+      "data": {
+        "owner": "Owner",
+        "brand": "Trade name",
+        "taxId": "Tax ID (CUIT)",
+        "address": "Registered address",
+        "email": "Contact"
+      },
+      "sections": [
+        {
+          "heading": "Site owner",
+          "body": [
+            "The details of the party responsible for this site are the ones listed in the table above. Any question about this legal notice can be sent to the email address shown there."
+          ]
+        },
+        {
+          "heading": "Purpose and acceptance",
+          "body": [
+            "This notice governs the use of the site that the owner makes available to users. By browsing it you accept these terms as published at the time of your visit.",
+            "The owner may change the presentation, configuration and content of the site, as well as these terms, at any time. The date of the last revision appears at the top of this page."
+          ]
+        },
+        {
+          "heading": "Terms of use",
+          "body": [
+            "By using the site you agree to:"
+          ],
+          "items": [
+            "Use it in good faith and in accordance with the law.",
+            "Not attempt to access restricted areas, or alter or damage how the site works.",
+            "Not use the contact form to send unlawful content, unsolicited advertising or malicious software.",
+            "Be responsible for the accuracy of the details you enter in the contact form."
+          ]
+        },
+        {
+          "heading": "Intellectual property",
+          "body": [
+            "The texts, design, trademarks, logos, photographs and audio files published on the site belong to the owner or are used with permission. They may not be reproduced, distributed, publicly communicated or altered without written permission.",
+            "Material a client hands over to be worked on — demos, tracks, stems, lyrics — remains the client's. The studio uses it solely to deliver the contracted service, and does not publish it or show it as an example without express authorisation."
+          ]
+        },
+        {
+          "heading": "Pricing and contracting",
+          "body": [
+            "Published prices are stated in Argentine pesos, are “from” figures and are informational: they are not a binding offer. The final price of each job is confirmed in writing before work starts, based on the material and the agreed scope.",
+            "The US dollar equivalent shown next to each price is a conversion reference for clients abroad, not a second price list."
+          ]
+        },
+        {
+          "heading": "Liability",
+          "body": [
+            "The owner aims to keep the site available and its information correct and up to date, but cannot guarantee the absence of interruptions, delays, errors or omissions, and is not liable for damage arising from them.",
+            "The site links to third-party services such as WhatsApp and Instagram. The owner does not control those sites and is not responsible for their content, availability or privacy practices."
+          ]
+        },
+        {
+          "heading": "Partial invalidity",
+          "body": [
+            "If any clause of this notice is declared void or unenforceable, the rest remains in force and is interpreted in line with the original purpose of the document."
+          ]
+        },
+        {
+          "heading": "Governing law and jurisdiction",
+          "body": [
+            "This notice is governed by Argentine law. Any dispute will be submitted to the ordinary courts of the Autonomous City of Buenos Aires, without prejudice to the venue that applies where the user qualifies as a consumer under Consumer Protection Act 24,240."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "eyebrow": "PRIVACY POLICY",
+      "heading": "Privacy policy",
+      "updated": "Last updated:",
+      "intro": "Here is what personal data we collect, what we use it for, how long we keep it and what you can ask us to do with it.",
+      "sections": [
+        {
+          "heading": "Data controller",
+          "body": [
+            "The controller is the site owner, whose full details appear in the legal notice. For anything related to your personal data you can write to the contact email listed there."
+          ]
+        },
+        {
+          "heading": "What we collect",
+          "body": [
+            "We only collect what you give us or what the server records in order to serve you the site:"
+          ],
+          "items": [
+            "What you enter in the contact form: name, email, WhatsApp (optional) and the message you write.",
+            "What you send us over WhatsApp, email or Instagram, including audio files and download links.",
+            "Technical data the server records when serving each page: IP address, browser type, date and time, and the page requested."
+          ]
+        },
+        {
+          "heading": "What we do not collect",
+          "body": [
+            "We do not ask for sensitive data. We do not process payments on the site, so you will never enter card or bank details here. We also do not run analytics or any tool that tracks your browsing."
+          ]
+        },
+        {
+          "heading": "What we use it for",
+          "items": [
+            "Answering your enquiry and putting together a quote.",
+            "Delivering the contracted service and staying in touch during the work.",
+            "Meeting legal, accounting and tax obligations."
+          ],
+          "body": [
+            "We do not use your data for advertising, we do not send newsletters, and we do not sell or share it with third parties for commercial purposes."
+          ]
+        },
+        {
+          "heading": "Legal basis",
+          "body": [
+            "Processing is based on your consent, given when you send the form or write to us through any channel, and on performance of the contract once a job is under way. It is governed by Personal Data Protection Act 25,326 of Argentina."
+          ]
+        },
+        {
+          "heading": "How long we keep it",
+          "body": [
+            "Enquiries that do not turn into a job are kept for up to one year from the last contact. Client data is kept for the duration of the relationship and afterwards for as long as tax and accounting obligations require."
+          ]
+        },
+        {
+          "heading": "Who we share it with",
+          "items": [
+            "The site's hosting provider, which stores technical data and the messages sent through the form.",
+            "The email provider we use to handle enquiries.",
+            "Public authorities, where a legal rule requires it."
+          ],
+          "body": [
+            "These providers act on our behalf and may only process the data in order to provide us with their service."
+          ]
+        },
+        {
+          "heading": "International transfers",
+          "body": [
+            "Some of those providers host information on servers outside Argentina. Where that happens, we contract services offering an adequate level of protection and sign the corresponding contractual clauses."
+          ]
+        },
+        {
+          "heading": "Your rights",
+          "body": [
+            "You can ask us at any time to:"
+          ],
+          "items": [
+            "Access the data we hold about you.",
+            "Rectify or update it if it is wrong or has changed.",
+            "Delete it, where no legal obligation requires us to keep it.",
+            "Withdraw the consent you gave, without affecting processing carried out beforehand."
+          ]
+        },
+        {
+          "heading": "How to exercise them",
+          "body": [
+            "Write to the contact email in the legal notice telling us what you need. We may ask you to prove your identity before responding.",
+            "Under section 14(3) of Act 25,326, the data subject may exercise the right of access free of charge at intervals of no less than six months, unless a legitimate interest to do otherwise is demonstrated.",
+            "The Agencia de Acceso a la Información Pública, the supervisory authority for Act 25,326, is empowered to handle complaints and claims brought in connection with breaches of personal data protection rules."
+          ]
+        },
+        {
+          "heading": "Minors",
+          "body": [
+            "The site is intended for people over 18. If you are a minor, you need permission from a parent or guardian to contract a service or send us your data."
+          ]
+        },
+        {
+          "heading": "Security",
+          "body": [
+            "We apply reasonable technical and organisational measures to protect the information. No system is infallible: if we detect an incident affecting your data we will tell you, and notify the authority where required."
+          ]
+        },
+        {
+          "heading": "Changes to this policy",
+          "body": [
+            "If we change how we handle data, we update this document and the date in the header. It is worth checking back occasionally."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "eyebrow": "COOKIE POLICY",
+      "heading": "Cookie policy",
+      "updated": "Last updated:",
+      "intro": "This site uses a single cookie, and it is a technical one. There is no analytics, no advertising and no social media pixels — which is why you will not see a consent banner either.",
+      "table": {
+        "name": "Name",
+        "owner": "Set by",
+        "purpose": "Purpose",
+        "duration": "Duration",
+        "locale": {
+          "owner": "This site",
+          "purpose": "Remembers which language you are browsing in so each page is served in that language.",
+          "duration": "Session only: the browser deletes it on close."
+        }
+      },
+      "sections": [
+        {
+          "heading": "What a cookie is",
+          "body": [
+            "It is a small file a site stores in your browser when you visit, letting it remember something between one page and the next. Some are technical — needed for the site to work — and others are analytics or advertising cookies, used to measure or profile you."
+          ]
+        },
+        {
+          "heading": "Which cookie this site uses",
+          "body": [
+            "The one in the table above, and no others. It is a technical cookie: it stores which language you are browsing in so the following pages reach you in that language. It cannot identify you, holds no personal data and is not shared with anyone."
+          ]
+        },
+        {
+          "heading": "What it does not use",
+          "items": [
+            "Analytics or audience measurement cookies.",
+            "Advertising, remarketing or profiling cookies.",
+            "Embedded social media buttons or pixels.",
+            "Any sale or transfer of browsing data to third parties."
+          ]
+        },
+        {
+          "heading": "Third-party services",
+          "body": [
+            "The site's fonts are loaded from Adobe Fonts (Adobe Inc.). That service sets no cookies on this domain, but when your browser requests the file it sends technical data such as your IP address and browser type. Their privacy policy is published on Adobe's site.",
+            "Links to WhatsApp and Instagram take you off this site. What happens there is governed by those platforms' policies, not by this one."
+          ]
+        },
+        {
+          "heading": "How to turn it off",
+          "body": [
+            "Every browser lets you block or delete cookies from its settings or privacy options. Blocking this site's cookie breaks nothing: the only effect is that the site stops remembering your language and shows the one it detects by default on each visit."
+          ]
+        },
+        {
+          "heading": "Changes",
+          "body": [
+            "If we add any cookie in the future, we will update this document and the date in the header before installing it."
+          ]
+        }
+      ]
+    }
+  }
+}

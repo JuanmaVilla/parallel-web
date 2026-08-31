@@ -4,12 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run lint:headlines && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:headlines": "node scripts/lint-headlines.mjs",
+    "lint:hex": "node scripts/lint-hex.mjs",
+    "verify": "node tools/audit.js",
+    "verify:ux": "node tools/interact.js",
+    "shots": "node tools/shoot.js"
   },
   "dependencies": {
     "next": "16.2.12",
+    "next-intl": "^4.13.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -20,6 +26,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
+    "puppeteer-core": "^25.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

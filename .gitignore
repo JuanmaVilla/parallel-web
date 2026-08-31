@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# masters de las fotos del hero. Pesan 23 MB y no se sirven: lo que se publica
+# son los webp de public/hero-cards/, que salen de scripts/convert-hero-cards.mjs.
+/fotos
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -39,3 +43,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# masters de audio. Pesan ~95 MB y no se sirven: lo que se publica son los
+# mp3 de public/audio/, que salen de scripts/convert-audio.sh.
+/Audios
+
+# output de la auditoria (reporte + screenshots + logs). Se regenera con tools/audit.js
+/parallel-studio-audit

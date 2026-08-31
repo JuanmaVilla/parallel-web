@@ -1,26 +1,2064 @@
 @import "tailwindcss";
+/* layer(base) es obligatorio. Tailwind v4 emite sus utilidades dentro de
+   @layer utilities, y el CSS sin capa le gana a cualquier capa sin importar
+   la especificidad. Sin esto, las reglas de elemento de tokens.css
+   (h1, body, ...) pisan utilidades como text-fluid-display. */
+@import "./tokens.css" layer(base);
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   Parallel Studios — puente entre tokens de marca y Tailwind v4
+
+   `@theme inline` hace que las utilidades emitan var(--pl-*) en vez de
+   resolver el valor. Resultado: los tokens de marca siguen siendo la
+   unica fuente de verdad, el tema claro sigue funcionando por cascada,
+   y no se duplica un solo hex en este archivo.
+
+   Fuente: app/tokens.css
+   Doc: ../../MARCA.md
+   ============================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ---------- Color: roles semanticos ---------- */
+  --color-bg: var(--pl-color-bg);
+  --color-surface: var(--pl-color-surface);
+  --color-elevated: var(--pl-color-elevated);
+  --color-line: var(--pl-color-border);
+
+  --color-ink: var(--pl-color-text);
+  --color-ink-body: var(--pl-color-text-body);
+  --color-ink-secondary: var(--pl-color-text-secondary);
+  --color-ink-muted: var(--pl-color-text-muted);
+  --color-ink-disabled: var(--pl-color-text-disabled);
+  --color-ink-accent: var(--pl-color-text-accent);
+
+  --color-accent: var(--pl-color-accent);
+  --color-accent-hover: var(--pl-color-accent-hover);
+  --color-accent-pressed: var(--pl-color-accent-pressed);
+  /* Texto sobre acento: SIEMPRE negro. Blanco no pasa WCAG AA. */
+  --color-on-accent: var(--pl-color-text-on-accent);
+
+  /* ---------- Color: paleta cruda ---------- */
+  --color-brand-red: var(--pl-red);
+  --color-brand-deep: var(--pl-deep);
+  --color-brand-orange: var(--pl-orange);
+
+  --color-neutral-950: var(--pl-black);
+  --color-neutral-900: var(--pl-bg);
+  --color-neutral-800: var(--pl-surface);
+  --color-neutral-700: var(--pl-elevated);
+  --color-neutral-600: var(--pl-line);
+  --color-neutral-500: var(--pl-gray-600);
+  --color-neutral-400: var(--pl-gray-500);
+  --color-neutral-300: var(--pl-gray-400);
+  --color-neutral-200: var(--pl-gray-300);
+  --color-neutral-100: var(--pl-gray-200);
+  --color-neutral-50: var(--pl-gray-100);
+
+  /* Excepcion documentada en tokens.css: identidad de un canal externo. */
+  --color-whatsapp: var(--pl-whatsapp);
+  --color-whatsapp-hover: var(--pl-whatsapp-hover);
+
+  /* ---------- Tipografia ---------- */
+  --font-display: var(--pl-font-display);
+  --font-sans: var(--pl-font-text);
+
+  --text-display-xl: var(--pl-text-display-xl);
+  --text-display-lg: var(--pl-text-display-lg);
+  --text-display-md: var(--pl-text-display-md);
+  --text-heading-lg: var(--pl-text-heading-lg);
+  --text-heading-md: var(--pl-text-heading-md);
+  --text-heading-sm: var(--pl-text-heading-sm);
+  --text-body-lg: var(--pl-text-body-lg);
+  --text-body-md: var(--pl-text-body-md);
+  --text-body-sm: var(--pl-text-body-sm);
+  --text-caption: var(--pl-text-caption);
+
+  /* Escala fluida para display. El cuerpo NO escala: 16px en todo breakpoint. */
+  --text-fluid-display: clamp(2.5rem, 1.5rem + 5vw, 4.75rem);
+  --text-fluid-hero: clamp(2rem, 0.85rem + 4vw, 4rem);
+  /* Los servicios de la seccion que sigue al hero. Es un escalon propio y no
+     el display de la escala porque van en caja alta y baja: las minusculas
+     tienen ascendentes y descendentes, asi que al mismo cuerpo ocupan mas
+     alto optico que unas versalitas y hay que componerlas mas chicas. */
+  --text-fluid-stack: clamp(2.25rem, 1.1rem + 4.2vw, 5rem);
+  /* Titular de la seccion de tarjetas. Va a sangre de la caja: el 10vw esta
+     calculado para que la linea mas larga llegue casi al margen sin tocarlo,
+     porque es un titular que tiene que ocupar todo el ancho para que las
+     tarjetas lo crucen por encima y se note el cruce. */
+  --text-fluid-svc: clamp(2.75rem, 10vw, 9rem);
+  --text-fluid-h1: clamp(2rem, 1.4rem + 3vw, 2.438rem);
+  --text-fluid-h2: clamp(1.6rem, 1.2rem + 2vw, 1.938rem);
+  --text-giant: var(--pl-text-giant);
+
+  /* Titulares en Proxima Nova 700 y mayusculas. Un pelo de tracking negativo
+     compacta el bloque; las versalitas de Proxima ya vienen bastante
+     separadas y a 76px se abren de mas. */
+  --tracking-title: -0.01em;
+
+  --tracking-brand: var(--pl-tracking-brand);
+  --tracking-display: var(--pl-tracking-display);
+  --tracking-heading: var(--pl-tracking-heading);
+  --tracking-caps: var(--pl-tracking-caps);
+
+  --leading-display: var(--pl-leading-display);
+  --leading-heading: var(--pl-leading-heading);
+  --leading-body: var(--pl-leading-body);
+
+  /* ---------- Forma ---------- */
+  --radius-sm: var(--pl-radius-sm);
+  --radius-md: var(--pl-radius-md);
+  --radius-lg: var(--pl-radius-lg);
+
+  /* ---------- Elevacion ---------- */
+  --shadow-e1: var(--pl-shadow-1);
+  --shadow-e2: var(--pl-shadow-2);
+  --shadow-e3: var(--pl-shadow-3);
+  --shadow-glow: var(--pl-glow-brand);
+
+  /* ---------- Movimiento ---------- */
+  --ease-standard: var(--pl-ease-standard);
+  --ease-enter: var(--pl-ease-enter);
+  --ease-exit: var(--pl-ease-exit);
+  --ease-expo: var(--pl-ease-expo);
+  --ease-quart: var(--pl-ease-quart);
+  --ease-spring: var(--pl-ease-spring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  color-scheme: dark;
+  /* Next 16 ya no pisa scroll-behavior en las transiciones de ruta.
+     El atributo data-scroll-behavior="smooth" del <html> es lo que
+     restaura ese comportamiento — ver app/[locale]/layout.tsx. */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
 }
+
+/* Foco visible en todo. Nunca se remueve. */
+:focus-visible {
+  outline: var(--pl-border-thick) solid var(--pl-color-accent);
+  outline-offset: 3px;
+  border-radius: var(--pl-radius-sm);
+}
+
+::selection {
+  background: var(--pl-color-accent);
+  color: var(--pl-color-text-on-accent);
+}
+
+/* Titular relleno con el degradado de marca.
+   Solo para display grande: background-clip recorta el color contra la forma
+   de la letra, y en cuerpo chico el degradado ensucia el trazo.
+   El color de respaldo es el rojo de marca, para el caso raro de que el
+   navegador no soporte background-clip: text. */
+.pl-text-gradient {
+  color: var(--pl-color-accent);
+  background-image: var(--pl-gradient-brand-diagonal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* El degradado se pinta sobre la caja del elemento, asi que necesita ser
+     inline-block para que la caja siga a la linea de texto y no al bloque. */
+  display: inline-block;
+}
+
+/* Rotulo tecnico relleno con el degradado corto.
+   Aparte de .pl-text-gradient y no un parametro suyo: aquello es para display
+   grande y va en diagonal sobre las tres paradas de marca; esto es lo
+   contrario —cuerpo de 14px, horizontal, dos paradas— y compartir una sola
+   regla obligaria a que cada uso mande cuatro propiedades.
+   El color declarado antes del recorte es el respaldo: si un navegador no
+   soporta background-clip: text, el rotulo se ve en rojo y no invisible. */
+.pl-label-gradient {
+  color: var(--pl-color-text-accent);
+  background-image: var(--pl-gradient-label);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* La caja tiene que seguir a la palabra: sobre un bloque, el degradado
+     recorreria el ancho de la tarjeta y el rotulo se comeria solo el arranque
+     naranja. */
+  display: inline-block;
+}
+
+/* En modo de colores forzados el sistema impone su paleta y el relleno
+   transparente deja el rotulo en blanco. */
+@media (forced-colors: active) {
+  .pl-label-gradient {
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+/* ============================================================
+   Hero
+
+   Todo lo que se mueve aca se deriva de --p, que escribe el rAF sobre el
+   escenario, y solo toca transform y opacity.
+
+   La escena tiene dos actos que se solapan: la sala tipografica atraviesa la
+   camara y, antes de que termine de irse, el campo de tarjetas ya esta
+   entrando. Si un acto acabase donde empieza el siguiente se veria el corte.
+   ============================================================ */
+
+/* Halo de marca. Es el unico glow de la pagina y solo funciona sobre negro
+   (MARCA.md §5). Se apaga a medida que avanza la escena, para que la pantalla
+   no quede lavada de rojo cuando el texto ya se fue.
+
+   `scale` va como propiedad independiente y no dentro de transform: el rAF
+   del parallax de puntero escribe transform, y meterlos juntos obligaria a
+   recomponer la cadena entera en JS cada frame. */
+.pl-hero__halo-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: calc(0.55 - clamp(0, calc(var(--p, 0) / 0.7), 1) * 0.3);
+}
+
+.pl-hero__halo {
+  width: min(92vw, 46rem);
+  aspect-ratio: 1;
+  background: var(--pl-gradient-glow-red);
+  filter: blur(40px);
+  scale: calc(1 + var(--p, 0) * 0.45);
+  will-change: transform;
+}
+
+/* El contenido sube y se apaga cuando el segundo acto ya esta en marcha, no
+   antes: el titular tiene que convivir con las tarjetas un tramo, que es lo
+   que hace que la escena se lea como una sola y no como dos pegadas. */
+.pl-hero__content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  --exit: clamp(0, calc((var(--p, 0) - 0.62) / 0.26), 1);
+  opacity: calc(1 - var(--exit));
+  transform: translate3d(0, calc(var(--exit) * -10vh), 0);
+  will-change: transform, opacity;
+}
+
+/* Invisible no es lo mismo que ausente: sin esto los botones apagados siguen
+   recibiendo clicks y foco de teclado sobre la escena. */
+.pl-hero__content[data-hidden] {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-hero__halo-wrap {
+    display: none;
+  }
+  .pl-hero__content {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+  .pl-room__box {
+    transform: translateZ(-120px);
+  }
+  .pl-room {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Revelado al entrar en viewport
+
+   El bloque arranca apagado y sube unos pixeles al aparecer. Lo dispara
+   components/ui/Reveal.tsx poniendo data-revealed en el elemento.
+
+   `-stagger` encadena los hijos directos con un retardo creciente: la grilla
+   entra en secuencia en vez de aparecer entera de golpe, que es lo que hace
+   que un bloque de tarjetas se sienta vivo y no impreso. El indice lo escribe
+   Reveal.tsx en --i, asi que la cadena no tiene tope de hijos.
+
+   La curva es expo y no la estandar de interfaz: un bloque grande que entra
+   con la misma curva que un hover se siente mecanico.
+   ============================================================ */
+
+[data-reveal],
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, var(--pl-reveal-shift), 0);
+  transition:
+    opacity var(--pl-duration-reveal) var(--pl-ease-expo),
+    transform var(--pl-duration-reveal) var(--pl-ease-expo);
+  transition-delay: calc(var(--i, 0) * var(--pl-stagger));
+}
+
+[data-reveal][data-revealed],
+[data-reveal-stagger][data-revealed] > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sin animacion, sin retardo y sin estado inicial apagado. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ============================================================
+   Titular por palabras
+
+   Las palabras suben desde detras de una mascara. Es la entrada editorial
+   clasica y es la unica animacion de texto que se usa en el sitio: partir por
+   caracteres en un titular de varias palabras es ilegible y hostil para
+   lectores de pantalla.
+
+   El texto accesible vive en el aria-label del contenedor; los <span> van
+   aria-hidden. Ver components/motion/SplitText.tsx.
+   ============================================================ */
+
+.pl-split__word {
+  display: inline-block;
+  overflow: hidden;
+  /* Sin esto la mascara recorta las colas de la g y la j. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: bottom;
+}
+
+.pl-split__word > span {
+  display: inline-block;
+  transform: translate3d(0, 110%, 0);
+  transition: transform var(--pl-duration-scene) var(--pl-ease-expo);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+[data-revealed] .pl-split__word > span {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-split__word > span {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Escena dirigida por scroll
+
+   Un contenedor alto marca el presupuesto de scroll y el escenario queda
+   clavado dentro. El progreso 0 -> 1 lo escribe el rAF en --p sobre el
+   escenario, y de ahi lo derivan las capas con calc(). Nada de estado de
+   React por frame: escribir una variable CSS no re-renderiza el arbol.
+   ============================================================ */
+
+.pl-scene {
+  position: relative;
+}
+
+.pl-scene__stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  /* SIN perspective aca. La ponen las capas. Ver .pl-room y .pl-field. */
+}
+
+/* ============================================================
+   Sala tipografica
+
+   Cinco planos de texto gigante montados como una habitacion, con la camara
+   dentro. Al hacer scroll la caja avanza y el visitante la atraviesa.
+
+   Aca SI se comparte una sola perspective con transform-style: preserve-3d,
+   al reves que en el resto del sitio. Es la excepcion que pide la regla: los
+   cinco planos son las caras de un mismo objeto rigido y tienen que ocluirse
+   entre si para que se lea como un espacio. Lo que no puede entrar en esta
+   capa es el contenido — el titular vive fuera, en 2D, o se ordenaria por
+   profundidad y desapareceria detras de una pared al acercarse.
+
+   El texto va en Proxima Nova 700 y no en Lastica: son titulares, es la
+   familia que les corresponde (MARCA.md §4), y ademas admite acentos, que es
+   lo que permite escribir el castellano correcto en las paredes.
+
+   Presupuesto de color: la sala entera ES el elemento de marca del viewport.
+   Por eso los botones del hero van en neutral y no en degradado.
+   ============================================================ */
+
+.pl-room {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  perspective: var(--pl-room-focal);
+  perspective-origin: 50% 50%;
+
+  /* La opacidad de salida vive AQUI y no en la caja, y no es un capricho de
+     organizacion: cualquier propiedad de agrupacion — opacity distinta de 1,
+     filter, overflow, y tambien `will-change: opacity` — fuerza
+     transform-style: flat en el elemento que la lleva. Puesta en la caja,
+     aplastaba las cuatro caras rotadas contra un plano y solo se veia el
+     fondo. Aca no molesta: este elemento no necesita preserve-3d, solo
+     establece la perspectiva. */
+  opacity: calc(1 - clamp(0, calc((var(--p, 0) - 0.3) / 0.28), 1));
+  will-change: opacity;
+
+  /* La sala mide poco mas de un viewport. Es lo que hace que las paredes, el
+     suelo y el techo salgan por los cuatro bordes del encuadre y converjan
+     hacia el fondo: mucho mas ancha, sus caras quedan fuera de cuadro y solo
+     se ve la pared del fondo suelta; mas estrecha, el texto de las paredes
+     se cruza con el titular. El 14% de sobreancho es justo lo que separa la
+     primera letra de las paredes del borde del titular. */
+  --pl-room-focal: 800px;
+  --pl-room-w: 114vw;
+  --pl-room-h: 100vh;
+  --pl-room-d: 1300px;
+}
+
+.pl-room__box {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* La caja arranca por detras y avanza. Se queda muy por debajo de la
+     distancia focal: pasado ese punto una cara se come el viewport. */
+  transform: translateZ(calc(-120px + var(--p, 0) * 640px));
+  will-change: transform;
+}
+
+/* El texto de cada cara va empujado al EXTREMO LEJANO de su plano, no
+   centrado. Centrado cae en la profundidad de la camara, donde el plano esta
+   de canto y la tipografia se estira hasta ser una mancha. Cual es el lado
+   lejano depende de la rotacion:
+     suelo   rotateX(90deg) y translateZ negativo -> lejos es arriba
+     techo   la MISMA rotacion con translateZ positivo. Con rotateX(-90deg)
+             el frente del plano mira hacia arriba y desde dentro de la sala
+             se ve su reverso. Ademas necesita scaleY(-1): ver su regla
+     pared izquierda rotateY(90deg)  -> el +x local se aleja, lejos es la derecha
+     pared derecha   rotateY(-90deg) -> al reves, lejos es la izquierda
+
+   Como las caras apilan sus lineas en columna, el eje principal del flex es
+   el vertical: el suelo y el techo empujan con justify-content y las paredes
+   con align-items.
+
+   Los tamanos estan atados a esa geometria y no son decorativos. El texto
+   de una pared se extiende a lo largo de la PROFUNDIDAD del plano: cuanto
+   mas larga es la palabra, mas se acerca su ultima letra a la camara, y
+   pasada la mitad del recorrido la escala se dispara y la letra se sale por
+   el borde. Con 20vh y la caja de 1300px, la palabra mas larga termina justo
+   antes de ese punto. Subir el tamano obliga a bajar la profundidad. */
+.pl-room__face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--pl-font-text);
+  font-weight: var(--pl-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-title);
+  line-height: 0.82;
+  white-space: nowrap;
+  color: var(--pl-color-accent);
+}
+
+/* rotateX(90deg) gira la normal del plano hacia arriba en pantalla: es el
+   suelo. El translateZ posterior actua sobre el eje LOCAL ya rotado, por eso
+   lleva signo negativo para bajarlo. */
+.pl-room__face--floor {
+  width: var(--pl-room-w);
+  height: var(--pl-room-d);
+  transform: translate(-50%, -50%) rotateX(90deg)
+    translateZ(calc(-1 * var(--pl-room-h) / 2));
+  justify-content: flex-start;
+  padding-top: 7%;
+  font-size: 23vw;
+}
+
+/* El techo lleva scaleY(-1) al final de la cadena. Mirando hacia arriba, la
+   parte del plano mas cercana a la camara se proyecta MAS ALTA en pantalla
+   que la lejana, asi que el eje vertical del elemento aparece invertido y el
+   texto se lee como un reflejo en el agua. Invertirlo en local lo devuelve a
+   su sitio; por eso su alineacion al extremo lejano es flex-end y no
+   flex-start como en el suelo. */
+.pl-room__face--ceiling {
+  width: var(--pl-room-w);
+  height: var(--pl-room-d);
+  transform: translate(-50%, -50%) rotateX(90deg)
+    translateZ(calc(var(--pl-room-h) / 2)) scaleY(-1);
+  justify-content: flex-end;
+  padding-bottom: 6%;
+  font-size: 23vw;
+}
+
+.pl-room__face--left {
+  width: var(--pl-room-d);
+  height: var(--pl-room-h);
+  transform: translate(-50%, -50%) rotateY(90deg)
+    translateZ(calc(-1 * var(--pl-room-w) / 2));
+  align-items: flex-end;
+  padding-right: 5%;
+  font-size: 18vh;
+}
+
+.pl-room__face--right {
+  width: var(--pl-room-d);
+  height: var(--pl-room-h);
+  transform: translate(-50%, -50%) rotateY(-90deg)
+    translateZ(calc(-1 * var(--pl-room-w) / 2));
+  align-items: flex-start;
+  padding-left: 5%;
+  font-size: 18vh;
+}
+
+/* Velo. Solo asienta la bajada contra el techo y el suelo. Desde que la sala
+   no tiene pared del fondo, el centro ya es negro puro y no hace falta taparlo. */
+.pl-room__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 40% 30% at 50% 52%,
+    color-mix(in srgb, var(--pl-color-bg) 70%, transparent) 0%,
+    color-mix(in srgb, var(--pl-color-bg) 34%, transparent) 55%,
+    transparent 86%
+  );
+}
+
+@media (max-width: 767px) {
+  .pl-room {
+    --pl-room-d: 1000px;
+  }
+  /* En pantalla angosta las paredes laterales no aportan espacio: su extremo
+     lejano cae casi en el centro y el texto se amontona encima del titular.
+     Se quedan el techo, el suelo y el fondo, que son los que dan la
+     profundidad. */
+  .pl-room__face--left,
+  .pl-room__face--right {
+    display: none;
+  }
+  /* Los tamanos suben respecto de desktop: en un viewport de 390px, el mismo
+     valor en vw da una tipografia que no llega a leerse como espacio. El
+     techo de cada uno es el ancho del plano — pasado eso, el overflow recorta
+     la palabra por los lados. */
+  .pl-room__face--ceiling { font-size: 22vw; }
+  .pl-room__face--floor { font-size: 22vw; }
+
+  /* El velo cubre mas que en desktop: la columna de texto ocupa casi todo el
+     ancho y compite con la pared del fondo en toda su altura. */
+  .pl-room__vignette {
+    background: radial-gradient(
+      ellipse 70% 34% at 50% 52%,
+      color-mix(in srgb, var(--pl-color-bg) 90%, transparent) 0%,
+      color-mix(in srgb, var(--pl-color-bg) 64%, transparent) 52%,
+      transparent 86%
+    );
+  }
+}
+
+/* ============================================================
+   Campo de tarjetas
+
+   Segundo acto del hero: la sala se va y las piezas del estudio pasan
+   volando junto a la camara. Capa aparte con su propia perspective, porque
+   son objetos sueltos y no las caras de un mismo cuerpo: aca si queremos
+   que el navegador las ordene por z-index respecto del titular.
+   ============================================================ */
+
+.pl-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  perspective: var(--pl-perspective);
+}
+
+.pl-field__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11rem;
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: var(--pl-border-hairline) solid var(--pl-gray-600);
+  border-radius: var(--pl-radius-md);
+  /* La foto lo tapa: esto es lo que se ve mientras carga. Un escalon mas
+     claro que la superficie de seccion, porque sobre negro puro una tarjeta
+     en --pl-color-surface no es una tarjeta vacia, es un agujero. */
+  background: linear-gradient(
+    160deg,
+    var(--pl-elevated),
+    var(--pl-color-surface)
+  );
+  box-shadow: var(--pl-shadow-3);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 767px) {
+  .pl-field__card {
+    width: 7rem;
+  }
+}
+
+/* ============================================================
+   Marquesina infinita
+
+   El contenido se duplica en JS y el track se desplaza exactamente -50%:
+   cuando la copia llega a donde estaba el original el bucle reinicia y no se
+   ve la costura. El easing tiene que ser linear o el bucle "respira".
+   ============================================================ */
+
+.pl-marquee {
+  overflow: hidden;
+  /* Desvanece las dos puntas contra el fondo para que las palabras no
+     aparezcan y desaparezcan de golpe en el borde. */
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+.pl-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: pl-marquee var(--pl-marquee-duration, 40s) linear infinite;
+}
+
+.pl-marquee__track[data-direction="reverse"] {
+  animation-direction: reverse;
+}
+
+/* Perseguir un enlace en movimiento es hostil: si el contenido es clicable,
+   la marquesina se para al pasar por encima. */
+.pl-marquee[data-pausable="true"]:hover .pl-marquee__track,
+.pl-marquee[data-pausable="true"]:focus-within .pl-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes pl-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-marquee__track {
+    animation: none;
+  }
+  .pl-marquee {
+    overflow-x: auto;
+  }
+}
+
+/* ============================================================
+   Textura y luz
+   ============================================================ */
+
+/* Grano de pelicula sobre todo el sitio.
+   Un negro plano se lee digital y barato; el grano le devuelve materia.
+   Va fijo y sin capturar clicks. La turbulencia se genera en el mismo SVG,
+   asi que no hay ningun archivo que descargar. */
+.pl-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Recurso de lineas paralelas (MARCA.md §5): rectas, verticales, grosor y
+   separacion constantes. Se usa como textura de fondo en neutral, nunca en
+   color de marca, y una sola vez por pieza. */
+.pl-lines {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--pl-color-border) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+/* Halo de ambiente detras del contenido de una seccion. Solo sobre negro. */
+.pl-ambient {
+  position: absolute;
+  pointer-events: none;
+  background: var(--pl-gradient-glow-red);
+  opacity: 0.35;
+  filter: blur(30px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-ambient {
+    display: none;
+  }
+}
+
+/* Tarjeta de contenido.
+   El borde se aclara y aparece sombra al pasar por encima. No se mueve ni
+   toma el color de marca: la tarjeta no es un enlace, y un hover que promete
+   interaccion donde no la hay confunde mas de lo que aporta.
+   Bajo `hover: hover` para que en tactil no quede el estado pegado. */
+@media (hover: hover) {
+  .pl-card {
+    transition:
+      border-color var(--pl-duration-base) var(--pl-ease-standard),
+      box-shadow var(--pl-duration-base) var(--pl-ease-standard);
+  }
+
+  .pl-card:hover {
+    border-color: var(--pl-gray-600);
+    box-shadow: var(--pl-shadow-2);
+  }
+}
+
+/* Skip link: fuera de pantalla hasta recibir foco. */
+.pl-skip-link {
+  position: fixed;
+  left: var(--pl-space-4);
+  top: var(--pl-space-4);
+  z-index: 100;
+  padding: var(--pl-space-3) var(--pl-space-4);
+  background: var(--pl-color-accent);
+  color: var(--pl-color-text-on-accent);
+  border-radius: var(--pl-radius-md);
+  font-family: var(--pl-font-text);
+  font-weight: var(--pl-weight-bold);
+  transform: translateY(-250%);
+  transition: transform var(--pl-duration-fast) var(--pl-ease-standard);
+}
+
+.pl-skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Tarjeta con foco de puntero
+
+   Un halo neutral sigue al cursor por encima de la tarjeta. Las coordenadas
+   las escribe un solo listener delegado en --mx/--my (ver SpotlightCard):
+   un listener por tarjeta en una grilla de seis es trabajo repetido para el
+   mismo evento.
+
+   El halo va en blanco al 6%, no en color de marca: seis tarjetas encendidas
+   en rojo gastarian de un saque todo el presupuesto de acento del viewport.
+   ============================================================ */
+
+.pl-spot {
+  position: relative;
+  isolation: isolate;
+}
+
+.pl-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--pl-duration-slow) var(--pl-ease-quart);
+  background: radial-gradient(
+    18rem circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.06),
+    transparent 70%
+  );
+}
+
+@media (hover: hover) {
+  .pl-spot:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Elevacion de hover. Dos pixeles: mas parece que la tarjeta salta. */
+@media (hover: hover) {
+  .pl-lift {
+    transition: transform var(--pl-duration-base) var(--pl-ease-quart);
+  }
+  .pl-lift:hover {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* ============================================================
+   Borde vivo de la tarjeta destacada
+
+   Un degradado de marca girando en el borde. Es el unico elemento en color
+   de marca de su seccion, asi que el CTA de ese bloque va secundario.
+
+   Dos fondos y no un pseudo-elemento: el relleno se recorta a padding-box y
+   el degradado a border-box, asi que el borde ES el degradado. Un ::before
+   con z-index negativo depende del orden de apilado del contenedor, y en una
+   tarjeta con fondo opaco acaba tapado o tapando — que es justo lo que pasa.
+
+   Se anima una propiedad registrada (--pl-angle) y no el background: sin el
+   @property el navegador no sabe interpolar un angulo y el degradado salta.
+   ============================================================ */
+
+@property --pl-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.pl-ring {
+  border: var(--pl-border-thick) solid transparent;
+  background:
+    linear-gradient(var(--pl-color-elevated), var(--pl-color-elevated)) padding-box,
+    conic-gradient(
+        from var(--pl-angle),
+        var(--pl-deep),
+        var(--pl-red) 20%,
+        var(--pl-orange) 35%,
+        var(--pl-red) 50%,
+        var(--pl-deep) 70%,
+        var(--pl-deep) 100%
+      )
+      border-box;
+  animation: pl-ring-spin 6s linear infinite;
+}
+
+@keyframes pl-ring-spin {
+  to { --pl-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-ring {
+    animation: none;
+    background:
+      linear-gradient(var(--pl-color-elevated), var(--pl-color-elevated)) padding-box,
+      var(--pl-gradient-brand) border-box;
+  }
+}
+
+/* ============================================================
+   Barrido de hover
+
+   Una banda de luz cruza la celda al entrar el puntero. Solo transform, asi
+   que no cuesta layout. Se usa en listas donde cada item no es un enlace: es
+   acuse de recibo, no promesa de interaccion.
+   ============================================================ */
+
+.pl-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.pl-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translate3d(-100%, 0, 0);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.04),
+    transparent
+  );
+}
+
+@media (hover: hover) {
+  .pl-sweep:hover::after {
+    transform: translate3d(100%, 0, 0);
+    transition: transform var(--pl-duration-scene) var(--pl-ease-quart);
+  }
+}
+
+/* ============================================================
+   Subrayado de navegacion
+
+   Entra por la izquierda y sale por la derecha: el origen cambia entre
+   hover y salida, que es lo que hace que el trazo parezca atravesar el
+   rotulo en vez de encogerse hacia donde vino.
+   ============================================================ */
+
+.pl-underline {
+  position: relative;
+}
+
+.pl-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4em;
+  height: var(--pl-border-hairline);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--pl-duration-base) var(--pl-ease-quart);
+}
+
+@media (hover: hover) {
+  .pl-underline:hover::after,
+  .pl-underline[aria-current]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.pl-underline[aria-current]::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   Barra de progreso de lectura
+
+   Cruza el pie de la cabecera. Es el unico elemento en color de marca que
+   acompana al usuario toda la pagina, y no compite con nada porque mide
+   1 pixel. El ancho lo escribe el rAF de la cabecera en --p.
+   ============================================================ */
+
+.pl-progress {
+  position: absolute;
+  inset: auto 0 calc(-1 * var(--pl-border-thick)) 0;
+  height: var(--pl-border-thick);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  background: var(--pl-gradient-heat-meter);
+  pointer-events: none;
+}
+
+/* ============================================================
+   Medidor vivo
+
+   Barras que respiran con una onda calculada en JS. Es la unica animacion en
+   bucle permanente del sitio fuera de las marquesinas, y esta justificada:
+   un medidor de audio quieto se lee como un grafico, uno que se mueve se lee
+   como senal. La altura la escribe el rAF en --h como escala, no como height:
+   escalar no provoca layout.
+   ============================================================ */
+
+.pl-meter__bar {
+  transform: scaleY(var(--h, 0.4));
+  transform-origin: bottom;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-meter__bar {
+    transform: scaleY(0.6);
+  }
+}
+
+/* ============================================================
+   Palabra gigante de separacion
+
+   Marca capitulo entre bloques densos. Va a sangre, recortada por los lados,
+   y en neutral muy bajo: es textura, no un titulo. Componer en Lastica es
+   correcto aca porque son palabras sueltas en versalitas (MARCA.md §4).
+   ============================================================ */
+
+.pl-giant {
+  font-family: var(--pl-font-display);
+  font-size: var(--pl-text-giant);
+  line-height: 0.85;
+  letter-spacing: var(--pl-tracking-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-synthesis: none;
+  color: transparent;
+  -webkit-text-stroke: var(--pl-border-hairline) var(--pl-color-border);
+}
+
+.pl-giant--solid {
+  color: var(--pl-color-surface);
+  -webkit-text-stroke: 0;
+}
+
+/* El contorno neutral es textura de fondo. En naranja de marca la palabra
+   pasa a leerse, asi que esta variante va en una sola banda por pagina. */
+.pl-giant--accent {
+  -webkit-text-stroke-color: var(--pl-orange);
+}
+
+/* ============================================================
+   Parallax de scroll
+
+   El hijo se desplaza a contramano de la pagina dentro de un marco con
+   overflow oculto. Sobresale por arriba y por abajo el mismo recorrido que
+   va a hacer, o al desplazarse asomaria el borde.
+   ============================================================ */
+
+.pl-parallax {
+  position: absolute;
+  inset: calc(-1 * var(--pl-parallax-amount, 64px)) 0;
+  transform: translate3d(
+    0,
+    calc((var(--p, 0.5) - 0.5) * var(--pl-parallax-amount, 64px) * 2),
+    0
+  );
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-parallax {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Cabecera
+
+   Fija y transparente sobre el hero, solida en cuanto arranca el scroll.
+   El atributo data-solid lo pone el rAF de Header.tsx; el color y el borde
+   los resuelve el CSS, que es donde tienen que estar.
+   ============================================================ */
+
+.pl-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  border-bottom: var(--pl-border-hairline) solid transparent;
+  transition:
+    background-color var(--pl-duration-slow) var(--pl-ease-quart),
+    border-color var(--pl-duration-slow) var(--pl-ease-quart),
+    backdrop-filter var(--pl-duration-slow) var(--pl-ease-quart);
+}
+
+.pl-header[data-solid] {
+  background-color: color-mix(in srgb, var(--pl-color-bg) 85%, transparent);
+  border-bottom-color: var(--pl-color-border);
+  backdrop-filter: blur(12px);
+}
+
+/* ============================================================
+   Linea del proceso
+
+   Se dibuja de izquierda a derecha mientras el bloque cruza la pantalla. El
+   tramo empieza en 0.25 y termina en 0.55 del recorrido: asi acaba de
+   dibujarse cuando la seccion esta centrada, no cuando ya se esta yendo.
+   ============================================================ */
+
+.pl-process__line {
+  height: var(--pl-border-hairline);
+  background: var(--pl-color-border);
+  transform: scaleX(clamp(0, calc((var(--p, 0) - 0.25) / 0.3), 1));
+  transform-origin: left;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-process__line {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Disco
+
+   Un CD inclinado con haces de luz cayendo encima. El disco gira con el
+   scroll y su material pasa de mate a iridiscente: no es decoracion suelta,
+   cuenta el paso de la mezcla cruda al master terminado.
+
+   Los haces van verticales, nunca en diagonal: son el recurso de lineas
+   paralelas de la marca (MARCA.md §5) usado como luz. Van en degradado de
+   marca y el disco queda en cromo neutral — al reves, el disco se comeria
+   todo el presupuesto de color del viewport.
+   ============================================================ */
+
+/* Zona del disco: TODO el alto que sobra por encima de la tarjeta, ni un
+   pixel mas. Es un hermano de la tarjeta en una columna flex, no una capa
+   absoluta encima de ella, y esa es la unica razon por la que el disco no
+   puede volver a taparla: no hay porcentaje que ajustar, no queda sitio
+   donde pisarse. En pantallas bajas la zona se achica sola y el disco con
+   ella. */
+.pl-disc-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  z-index: 1;
+  /* Contenedor de consulta: deja medir el disco contra esta zona (cqh) y no
+     contra la ventana (vh), que es lo que lo hacia desbordar cuando la
+     tarjeta crecia. */
+  container-type: size;
+  /* Camara de la escena. Van sin unidad para que JS las lea con parseFloat y
+     proyecte los haces con exactamente los mismos angulos que usa el CSS:
+     una sola fuente de verdad. Si se tocan aca, los haces siguen clavados
+     solos. No son tokens de marca — solo esta escena los usa. */
+  --pl-disc-perspective: 1200;
+  /* Cuanto se abre la elipse. 90 seria el disco de canto; 0, de frente. */
+  --pl-disc-tilt: 56;
+  /* Inclinacion diagonal en el plano de la pantalla. Es lo que lo saca de
+     "acostado sobre una mesa" y lo deja parado en diagonal. */
+  --pl-disc-lean: -26;
+  /* Cuanto se mueve como mucho siguiendo al puntero, en grados sobre los dos
+     angulos de arriba. Cinco es a proposito poco: la gracia es que el disco
+     parezca un objeto que esta ahi y no un panel pegado al fondo. Pasados los
+     ocho ya se lee como que se bambolea, y ademas los puntos de impacto de
+     los haces empiezan a despegarse de la superficie. */
+  --pl-disc-sway: 5;
+  perspective: calc(var(--pl-disc-perspective) * 1px);
+  pointer-events: none;
+}
+
+.pl-disc {
+  position: absolute;
+  /* Centrado en su zona, en el mismo eje que la tarjeta. El translate deja
+     el centro del disco justo sobre este punto — de eso depende JS para
+     ubicar los haces, ver project() en DiscScene. */
+  top: 50%;
+  left: 50%;
+  /* El limite que manda casi siempre es el alto de la zona (cqh); el de
+     ancho solo entra en pantallas angostas, y el de rem le pone techo en
+     monitores grandes para que no se vuelva un cartel. */
+  width: min(64cqw, 30rem, 90cqh);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  /* Estado mate: el disco antes del master. Las estrias son el mismo recurso
+     de lineas, en circulo. */
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--pl-white) 5%, transparent) 0 1px,
+      transparent 1px 5px
+    ),
+    radial-gradient(circle at 50% 50%, var(--pl-elevated), var(--pl-surface));
+  /* Se lee de derecha a izquierda: primero el disco gira sobre su propio eje
+     — eso es el giro con el scroll —, despues se abre en elipse, y recien al
+     final se inclina en diagonal sobre la pantalla. En ese orden el giro se
+     ve como un disco girando; si la diagonal fuera antes, se veria como el
+     disco entero bamboleandose. Una vuelta completa por escena.
+
+     A los dos angulos de la pose se les suma el balanceo del puntero
+     (--sway-x, --sway-y: -1 a 1, los escribe JS por frame). Va sumado y no
+     como una rotacion aparte para que sea la MISMA pose la que se mueve: dos
+     rotaciones encadenadas sobre los mismos ejes se pelean entre si y el
+     disco termina cabeceando. */
+  transform:
+    rotateZ(calc((var(--pl-disc-lean) + var(--sway-x, 0) * var(--pl-disc-sway)) * 1deg))
+    rotateX(calc((var(--pl-disc-tilt) + var(--sway-y, 0) * var(--pl-disc-sway)) * 1deg))
+    rotateZ(calc(var(--p, 0) * 360deg));
+  box-shadow: var(--pl-shadow-3);
+  will-change: transform;
+}
+
+/* Estado cromo. Se monta encima del mate y sube con el recorrido, asi que el
+   cambio de material es una sola propiedad animada y no dos fondos que se
+   pelean. */
+.pl-disc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: clamp(0, calc((var(--p, 0) - 0.12) / 0.38), 1);
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--pl-black) 12%, transparent) 0 1px,
+      transparent 1px 5px
+    ),
+    conic-gradient(
+      from 200deg,
+      var(--pl-gray-500),
+      var(--pl-gray-200) 8%,
+      var(--pl-white) 16%,
+      var(--pl-gray-400) 26%,
+      var(--pl-gray-100) 38%,
+      var(--pl-gray-500) 50%,
+      var(--pl-gray-100) 62%,
+      var(--pl-white) 72%,
+      var(--pl-gray-400) 84%,
+      var(--pl-gray-500) 100%
+    );
+}
+
+/* Agujero central. Va como elemento y no como parada del degradado radial:
+   asi recorta tambien la capa de cromo, que es un hijo. */
+.pl-disc__hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--pl-color-bg);
+  box-shadow: 0 0 0 6% color-mix(in srgb, var(--pl-white) 10%, transparent);
+}
+
+/* Haz de luz. Donde cae lo calcula JS midiendo la elipse en la que se
+   proyecta el disco; en CSS solo queda como crece.
+
+   Va por ENCIMA del disco, no por detras: los haces tienen que cruzarlo y
+   dejar ver el punto de impacto en la superficie. Detras, el disco tapaba
+   justo lo unico que hacia falta ver. */
+.pl-beam {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: var(--pl-border-thick);
+  transform-origin: top;
+  transform: scaleY(var(--grow, 0));
+  background: var(--pl-gradient-brand);
+  will-change: transform;
+}
+
+/* Punto de impacto: donde el haz toca el disco. */
+.pl-beam__hit {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0.5rem;
+  aspect-ratio: 1;
+  translate: -50% 50%;
+  border-radius: 50%;
+  background: var(--pl-color-accent);
+  box-shadow: var(--pl-glow-brand);
+  opacity: var(--grow, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Queda inclinado igual — la pose no es movimiento. Lo que se cae es el
+     giro con el scroll. */
+  .pl-disc {
+    transform:
+      rotateZ(calc(var(--pl-disc-lean) * 1deg))
+      rotateX(calc(var(--pl-disc-tilt) * 1deg));
+  }
+  .pl-disc::before {
+    opacity: 1;
+  }
+  .pl-beam {
+    transform: scaleY(1);
+  }
+  .pl-beam__hit {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Escena que se construye con el scroll
+
+   La pantalla arranca completamente vacia — negro puro, sin una sombra ni un
+   borde — y cada pieza entra cuando el recorrido llega a su tramo. Nada esta
+   "ya ahi esperando": el rotulo primero, luego la entradilla, y despues los
+   datos y las fichas alternandose uno a uno.
+
+   El tramo de cada pieza va en --from, escrito inline. Su progreso propio
+   sale de ahi, asi que el bloque se lee como una lista que alguien completa
+   delante tuyo y no como cuatro cosas que aparecen a la vez.
+   ============================================================ */
+
+/* Centrado optico, no matematico.
+ *
+ * El bloque esta centrado de verdad en el escenario, y aun asi se lee caido:
+ * un texto justo en la mitad de una pantalla vacia siempre parece bajo.
+ * Encima aca la cabecera ocupa la banda de arriba, asi que el hueco libre de
+ * verdad no es la pantalla entera y su centro esta mas alto todavia.
+ *
+ * Se sube con transform y no con margen porque el escenario centra por flex:
+ * un margen inferior desplazaria la mitad de su valor y ademas cambiaria el
+ * alto de la caja. El transform no toca el layout, y no pisa a las fichas —
+ * viven en otra rama, absolutas sobre el escenario.
+ */
+.pl-stack__column {
+  transform: translate3d(0, -4vh, 0);
+}
+
+@media (min-width: 1024px) {
+  .pl-stack__column {
+    transform: translate3d(0, -6vh, 0);
+  }
+}
+
+/* El rotulo y la entradilla. Entran como las lineas y, si se les pasa un
+   --hold, tambien se van: el remate necesita la pantalla para el solo — es el
+   unico elemento de marca del viewport cuando llega, y la entradilla dice casi
+   con las mismas palabras lo que el remate esta por decir mejor.
+
+   Sin --hold la pieza se queda puesta para siempre, que es el caso por
+   defecto: 99 es "nunca", no un numero elegido. */
+.pl-stack__item {
+  --at: clamp(0, calc((var(--p, 0) - var(--from, 0)) / 0.06), 1);
+  --gone: clamp(
+    0,
+    calc((var(--p, 0) - var(--from, 0) - var(--hold, 99)) / 0.06),
+    1
+  );
+  opacity: calc(var(--at) - var(--gone));
+  transform: translate3d(
+    0,
+    calc((1 - var(--at)) * 0.5em - var(--gone) * 0.5em),
+    0
+  );
+  will-change: transform, opacity;
+}
+
+/* Las cuatro lineas no se apilan: se turnan.
+ *
+ * Todas ocupan la MISMA celda de la grilla, asi que solo hay una frase en
+ * pantalla a la vez. Entra, se queda mientras dura su tramo de scroll y se va
+ * hacia arriba justo cuando la siguiente empieza a entrar. Es lo que permite
+ * componerlas al doble de cuerpo que si estuvieran las cuatro juntas: el sitio
+ * que antes se repartian ahora lo tiene entera cada una.
+ *
+ * La celda la dimensiona la linea mas alta — son hermanas en la misma celda —
+ * asi que el bloque no da un salto de altura al cambiar de frase.
+ */
+.pl-stack__lines {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Dos ventanas sobre el mismo recorrido, no una.
+ *
+ *   --in    0 -> 1 al entrar, a partir de --from.
+ *   --out   0 -> 1 al salir, a partir de --from + --hold.
+ *
+ * La opacidad es la resta de las dos. Restar y no multiplicar por (1 - out)
+ * es lo que hace que el tramo de reposo sea exactamente --hold: mientras out
+ * vale 0 la resta es in, y cuando out arranca in ya vale 1.
+ *
+ * --hold se escribe inline por linea. La ultima lo lleva alto a proposito:
+ * es el remate de la seccion y tiene que seguir puesto cuando el recorrido se
+ * acaba, no dejar la pantalla vacia justo en la frase que cierra.
+ */
+.pl-stack__line {
+  --in: clamp(0, calc((var(--p, 0) - var(--from, 0)) / 0.05), 1);
+  --out: clamp(
+    0,
+    calc((var(--p, 0) - var(--from, 0) - var(--hold, 0.14)) / 0.06),
+    1
+  );
+  grid-area: 1 / 1;
+  max-width: 22ch;
+  opacity: calc(var(--in) - var(--out));
+  /* Entra desde abajo y sale hacia arriba: el recorrido de la frase acompana
+     al del scroll en vez de cruzarlo. */
+  transform: translate3d(
+    0,
+    calc((1 - var(--in)) * 0.4em - var(--out) * 0.4em),
+    0
+  );
+  will-change: transform, opacity;
+}
+
+/* ------------------------------------------------------------------
+   El remate
+
+   La ultima linea no entra igual que las otras tres: se ENCIENDE. Las tres
+   primeras son el planteo — cosas que el visitante ya sabe de si mismo — y
+   esta es la respuesta del estudio. Si entrara con el mismo fundido que las
+   demas seria la cuarta de una lista; encendiendose es el final de una.
+
+   Es tambien el unico elemento en color de marca del viewport cuando esta en
+   pantalla: el rotulo naranja de arriba se retira justo antes de que llegue
+   (ver --from del eyebrow en ScrollStack.tsx). Regla 80/15/5, MARCA.md §3.
+
+   Naranja plano y no --pl-gradient-brand: el degradado es para un rotulo de
+   una o dos palabras. Cruzando una frase entera se lee como una franja de
+   color impresa encima del texto, no como el texto siendo de ese color.
+
+   El encendido lo dispara JS con [data-lit] y no una animacion atada al
+   scroll: el parpadeo tiene que ocurrir a su propio ritmo — es un tubo que
+   prende, no algo que el visitante arrastra. Atado a --p, scrollear despacio
+   lo convierte en un fundido y scrollear rapido se lo salta entero.
+   ------------------------------------------------------------------ */
+
+.pl-punch {
+  position: relative;
+  color: var(--pl-color-text);
+}
+
+/* Las dos copias del glitch. Existen siempre pero solo se ven durante el
+   encendido: son el error de registro de una senal de video — la misma
+   palabra impresa dos veces con las tintas corridas.
+
+   aria-hidden implicito: son ::before/::after, no llegan al arbol de
+   accesibilidad, asi que el lector de pantalla lee la frase una sola vez. */
+.pl-punch::before,
+.pl-punch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pl-punch::before {
+  color: var(--pl-orange);
+}
+
+.pl-punch::after {
+  color: var(--pl-red);
+}
+
+/* Rayo. Una barra fina debajo de la frase que salta con el ultimo parpadeo y
+   se queda encendida. Cierra el bloque por abajo: sin ella el glow se
+   desvanece hacia el negro y la frase queda flotando. */
+.pl-punch__bolt {
+  display: block;
+  height: var(--pl-border-thick);
+  width: 0;
+  margin: var(--pl-space-4) auto 0;
+  border-radius: var(--pl-radius-full);
+  background: var(--pl-gradient-heat-meter);
+  box-shadow: var(--pl-glow-punch);
+}
+
+/* --- Encendido --------------------------------------------------- */
+
+.pl-punch[data-lit] {
+  animation:
+    pl-punch-ignite var(--pl-duration-ignite) steps(1, end) both,
+    pl-punch-breathe var(--pl-duration-breathe) var(--pl-ease-standard)
+      var(--pl-duration-ignite) infinite;
+}
+
+.pl-punch[data-lit]::before {
+  animation: pl-punch-slice-a var(--pl-duration-ignite) steps(1, end) both;
+}
+
+.pl-punch[data-lit]::after {
+  animation: pl-punch-slice-b var(--pl-duration-ignite) steps(1, end) both;
+}
+
+.pl-punch[data-lit] .pl-punch__bolt {
+  animation: pl-punch-bolt var(--pl-duration-ignite) var(--pl-ease-expo) both;
+}
+
+/* El cuerpo de la frase: blanco, tres parpadeos, y queda naranja encendido.
+   steps(1, end) en la animacion: un tubo no atenua, conmuta. */
+@keyframes pl-punch-ignite {
+  0%,
+  18% {
+    color: var(--pl-color-text);
+    text-shadow: none;
+  }
+  24%,
+  38% {
+    color: var(--pl-orange);
+    text-shadow: var(--pl-glow-punch);
+  }
+  42%,
+  52% {
+    color: var(--pl-color-text);
+    text-shadow: none;
+  }
+  56%,
+  100% {
+    color: var(--pl-orange);
+    text-shadow: var(--pl-glow-punch);
+  }
+}
+
+/* Las bandas del glitch. Los porcentajes de clip-path son bandas
+   horizontales del alto de la frase: cada paso corta por otro sitio, asi que
+   el desplazamiento no se lee como la palabra entera moviendose sino como
+   trozos de ella desalineados. Terminan en opacidad 0 — el glitch es el
+   encendido, no el estado final. */
+@keyframes pl-punch-slice-a {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate3d(-0.16em, 0.02em, 0);
+    clip-path: inset(8% 0 64% 0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(0.11em, -0.03em, 0);
+    clip-path: inset(56% 0 16% 0);
+  }
+  44% {
+    opacity: 1;
+    transform: translate3d(-0.09em, 0, 0);
+    clip-path: inset(30% 0 46% 0);
+  }
+  54% {
+    opacity: 0.8;
+    transform: translate3d(0.04em, 0.02em, 0);
+    clip-path: inset(70% 0 4% 0);
+  }
+  62%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* La segunda copia va al lado contrario en cada paso: es lo que produce el
+   corrimiento de tinta. Con las dos al mismo lado solo se veria una sombra. */
+@keyframes pl-punch-slice-b {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate3d(0.13em, -0.02em, 0);
+    clip-path: inset(48% 0 22% 0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(-0.1em, 0.03em, 0);
+    clip-path: inset(4% 0 72% 0);
+  }
+  44% {
+    opacity: 1;
+    transform: translate3d(0.07em, 0, 0);
+    clip-path: inset(66% 0 10% 0);
+  }
+  54% {
+    opacity: 0.8;
+    transform: translate3d(-0.03em, -0.02em, 0);
+    clip-path: inset(24% 0 58% 0);
+  }
+  62%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* El rayo entra con el ultimo parpadeo, no antes: si arrancase con el primero
+   competiria con el glitch y no se veria ninguno de los dos. */
+@keyframes pl-punch-bolt {
+  0%,
+  52% {
+    width: 0;
+    opacity: 0;
+  }
+  56% {
+    width: 38%;
+    opacity: 1;
+  }
+  100% {
+    width: 62%;
+    opacity: 1;
+  }
+}
+
+/* Respiracion. Solo el glow, nunca la opacidad ni el color: una frase que
+   parpadea despues de haber prendido se lee como un fallo. */
+@keyframes pl-punch-breathe {
+  0%,
+  100% {
+    text-shadow: var(--pl-glow-punch);
+  }
+  50% {
+    text-shadow:
+      0 0 3px rgba(var(--pl-orange-rgb), 0.75),
+      0 0 12px rgba(var(--pl-orange-rgb), 0.35),
+      0 0 44px rgba(var(--pl-red-rgb), 0.18);
+  }
+}
+
+/* Fichas. Entran con un pelin de escala y, una vez puestas, se desplazan a
+   distinta velocidad segun su profundidad: es lo que las separa del fondo
+   sin necesidad de una caja ni una linea. */
+.pl-chip {
+  --at: clamp(0, calc((var(--p, 0) - var(--from, 0)) / 0.06), 1);
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: var(--pl-border-hairline) solid var(--pl-color-border);
+  border-radius: var(--pl-radius-md);
+  background: var(--pl-color-elevated);
+  box-shadow: var(--pl-shadow-2);
+  opacity: var(--at);
+  transform: translate3d(0, calc((var(--p, 0) - 0.5) * var(--depth, 40) * -1px), 0)
+    rotate(var(--tilt, 0deg)) scale(calc(0.84 + var(--at) * 0.16));
+  will-change: transform, opacity;
+}
+
+/* Ficha con foto. Crece porque una foto a 60px es una mancha: a ese tamano solo
+   se leen marcas a escala de icono, que es lo que son las otras fichas. El
+   contraste de tamano entre unas y otras no es un descuido — separa las dos
+   capas de profundidad mejor que el parallax solo.
+
+   Apaisada porque el motivo de cada foto es una escena con dos cosas dentro
+   (alguien y su sitio), y en vertical habria que recortar una de las dos. */
+.pl-chip--photo {
+  width: clamp(7rem, 12vw, 11rem);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+/* Retira la ficha en pantalla angosta.
+   Va como modificador aqui y no con la utilidad `hidden` de Tailwind: esta
+   hoja es CSS sin capa y le gana a `@layer utilities`, asi que el
+   `display: grid` de .pl-chip pisaba el `display: none` de la utilidad. */
+@media (max-width: 767px) {
+  .pl-chip--wide-only {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-stack__item,
+  .pl-stack__line {
+    opacity: 1;
+    transform: none;
+  }
+  /* Sin movimiento no hay turnos: las cuatro tienen que caber a la vez, asi
+     que la celda unica se deshace y vuelven a ser una columna. */
+  .pl-stack__lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pl-space-3);
+  }
+  .pl-stack__line {
+    grid-area: auto;
+    max-width: none;
+  }
+  .pl-chip {
+    opacity: 1;
+    transform: rotate(var(--tilt, 0deg));
+  }
+  /* El remate llega ya encendido: el color y el glow son informacion — dicen
+     cual es la frase que cierra —, el parpadeo no. */
+  .pl-punch,
+  .pl-punch[data-lit] {
+    color: var(--pl-orange);
+    text-shadow: var(--pl-glow-punch);
+    animation: none;
+  }
+  .pl-punch[data-lit]::before,
+  .pl-punch[data-lit]::after {
+    animation: none;
+    opacity: 0;
+  }
+  .pl-punch[data-lit] .pl-punch__bolt {
+    animation: none;
+    width: 62%;
+  }
+}
+
+/* ============================================================
+   Tarjetas de servicio que cruzan la pantalla
+
+   Un titular grande clavado en el centro y cuatro tarjetas que lo atraviesan
+   con el scroll. Cada una entra por abajo, se detiene un tramo en el centro y
+   sale por arriba: la parada es lo que la hace usable, porque una tarjeta que
+   nunca frena no se puede ni mirar ni pulsar.
+
+   El recorrido lo escribe el rAF en el elemento exterior. El giro vive en un
+   elemento interior aparte, y esa division es la que hace que las dos cosas
+   convivan: la de fuera se traslada en 2D y aporta la perspective, la de
+   dentro rota en 3D dentro de esa perspective.
+   ============================================================ */
+
+.pl-svc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Sube respecto del ancho anterior (13rem) porque la cara de atras es una
+     ficha con cuatro lineas: por debajo de esto el detalle no entra sin
+     apretar el interlineado hasta dejar de leerse. */
+  width: clamp(16rem, 23vw, 21rem);
+  aspect-ratio: 4 / 5;
+  perspective: 1400px;
+  will-change: transform, opacity;
+}
+
+.pl-svc__flip {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transform-style: preserve-3d;
+  transition: transform var(--pl-duration-scene) var(--pl-ease-expo);
+  will-change: transform;
+  cursor: pointer;
+}
+
+.pl-svc__flip[data-flipped] {
+  transform: rotateY(180deg);
+}
+
+.pl-svc__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: var(--pl-border-hairline) solid var(--pl-color-border);
+  border-radius: var(--pl-radius-lg);
+  background: var(--pl-color-elevated);
+  box-shadow: var(--pl-shadow-3);
+  /* Sin esto se ve el reverso de la cara de atras a traves de la de delante
+     y la tarjeta parece de cristal. */
+  backface-visibility: hidden;
+}
+
+/* Cara de atras: una ficha, no un parrafo.
+ *
+ * El detalle son cuatro datos sueltos y equivalentes entre si. Apilados a
+ * palo seco se leen como un bloque gris del que no se distingue donde termina
+ * uno y empieza el siguiente. Aca cada dato ocupa su propia fila, separada
+ * por un filete, con un guion que marca el arranque: la vista los cuenta
+ * antes de leerlos.
+ */
+.pl-svc__face--back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pl-space-4);
+  padding: var(--pl-space-6);
+  /* Mismo fondo que el frente, pero aca se ve: sin foto encima, la cara de
+     atras es la tarjeta desnuda. */
+  background: var(--pl-color-elevated);
+}
+
+.pl-svc__back-head {
+  display: block;
+}
+
+/* Las filas se comen el alto que sobra, asi que el pie queda pegado abajo
+   sin necesidad de space-between — que con tres hijos repartiria mal. */
+.pl-svc__specs {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: center;
+  border-top: var(--pl-border-hairline) solid var(--pl-color-border);
+}
+
+.pl-svc__spec {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pl-space-3);
+  padding-block: var(--pl-space-3);
+  border-bottom: var(--pl-border-hairline) solid var(--pl-color-border);
+}
+
+/* Guion de arranque. Va en em para caer a media altura de la primera linea
+   aunque el dato ocupe dos. */
+.pl-svc__spec-mark {
+  flex: none;
+  width: var(--pl-space-3);
+  height: var(--pl-border-hairline);
+  margin-top: 0.72em;
+  background: var(--pl-color-text-muted);
+}
+
+/* El pie repite la forma del boton del frente para que se lea como lo que
+   es: el gesto que deshace el giro. */
+.pl-svc__back-foot {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+  min-height: var(--pl-space-8);
+  padding-inline: var(--pl-space-4);
+  border: var(--pl-border-hairline) solid var(--pl-color-border);
+  border-radius: var(--pl-radius-full);
+}
+
+/* En tarjeta chica el margen interior se achica antes que la tipografia:
+   perder aire se nota menos que perder cuerpo de letra. */
+@media (max-width: 1023px) {
+  .pl-svc__face--back {
+    padding: var(--pl-space-4);
+    gap: var(--pl-space-3);
+  }
+  .pl-svc__spec {
+    padding-block: var(--pl-space-2);
+  }
+}
+
+/* Portada. La foto del servicio se desenfoca al pasar el puntero para que el
+   texto de encima se lea sin necesidad de una plancha opaca. */
+.pl-svc__cover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  /* La foto lo tapa: esto es lo que se ve mientras carga. */
+  background: linear-gradient(155deg, var(--pl-elevated), var(--pl-black));
+  transition:
+    filter var(--pl-duration-slow) var(--pl-ease-quart),
+    transform var(--pl-duration-slow) var(--pl-ease-quart);
+}
+
+@media (hover: hover) {
+  .pl-svc__flip:hover .pl-svc__cover,
+  .pl-svc__flip:focus-visible .pl-svc__cover {
+    /* Desenfoque grande a proposito: pasados los ~18px la foto deja de ser
+       una foto y pasa a ser una mancha de color. Eso es lo que se mira, y es
+       lo que hay que conservar — no se tapa.
+       La legibilidad no sale de oscurecer la imagen hasta matarla, sale de
+       tres cosas chicas sumadas: el desenfoque aplana los picos de brillo,
+       un cuarto de brillo menos baja el techo, y la saturacion sube para que
+       el color no se apague al hacerlo. El resto lo ponen la plancha del
+       panel y la sombra del texto. */
+    filter: blur(20px) saturate(1.35) brightness(0.72);
+    transform: scale(1.12);
+  }
+}
+
+/* Rotulo permanente abajo. Es lo que hace legible la tarjeta de un vistazo
+   mientras cruza, sin depender del hover — que en tactil no existe. */
+.pl-svc__label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--pl-space-6);
+  background: var(--pl-gradient-fade-to-bg);
+  transition: opacity var(--pl-duration-base) var(--pl-ease-quart);
+}
+
+/* Indicio de hover.
+ *
+ * El segundo nivel de la tarjeta vive detras del puntero, y una tarjeta que
+ * cruza la pantalla sola no se ve como algo que responda: se mira pasar. Este
+ * punto con su halo es todo el aviso — del tamano de un led, en neutral y sin
+ * una palabra que lo explique. Alcanza porque es el gesto que ya conoce
+ * cualquiera: algo que late en una esquina es algo que se puede tocar.
+ *
+ * Se apaga en cuanto el puntero llega — ya cumplio, y estorbaria encima del
+ * panel — y no existe en tactil, donde no hay hover que anunciar y el panel
+ * va siempre puesto.
+ */
+.pl-svc__cue {
+  position: absolute;
+  top: var(--pl-space-6);
+  right: var(--pl-space-6);
+  z-index: 1;
+  width: var(--pl-space-2);
+  height: var(--pl-space-2);
+  border-radius: var(--pl-radius-full);
+  background: var(--pl-color-text-secondary);
+  opacity: 0.5;
+  transition: opacity var(--pl-duration-base) var(--pl-ease-quart);
+}
+
+/* El halo. Escala desde el punto y se apaga antes de llegar al borde, asi
+   que nunca se lee como un anillo suelto. */
+.pl-svc__cue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--pl-border-hairline) solid var(--pl-color-text-secondary);
+  animation: pl-cue-ping var(--pl-duration-pulse) var(--pl-ease-quart) infinite;
+}
+
+@keyframes pl-cue-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(3.4); opacity: 0; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+
+@media (hover: none) {
+  .pl-svc__cue {
+    display: none;
+  }
+}
+
+/* Panel de hover. Aparece encima de la portada desenfocada. */
+.pl-svc__info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--pl-space-4);
+  padding: var(--pl-space-6);
+  /* La plancha viaja con el panel, no con la portada: aparece y se va con el
+     texto que sostiene. Va translucida, no opaca — a 88% el color de la foto
+     desaparecia y la tarjeta quedaba como una caja negra. A la mitad de eso
+     el desenfoque sigue viendose y el texto ya tiene contra que apoyarse. */
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--pl-black) 46%, transparent) 0%,
+    color-mix(in srgb, var(--pl-black) 62%, transparent) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--pl-duration-slow) var(--pl-ease-quart);
+}
+
+/* Sombra corta bajo el texto del panel. Es lo que permite bajar la plancha:
+   despega la letra de la mancha de color sin oscurecerla de forma pareja,
+   asi que trabaja solo donde hay texto. No va en la pildora — esa lleva
+   texto negro sobre blanco y una sombra ahi solo la ensucia. */
+.pl-svc__info-text {
+  text-shadow:
+    0 var(--pl-border-hairline) var(--pl-space-2)
+      color-mix(in srgb, var(--pl-black) 78%, transparent),
+    0 0 var(--pl-space-1) color-mix(in srgb, var(--pl-black) 55%, transparent);
+}
+
+@media (hover: hover) {
+  .pl-svc__flip:hover .pl-svc__info,
+  .pl-svc__flip:focus-visible .pl-svc__info {
+    opacity: 1;
+  }
+  .pl-svc__flip:hover .pl-svc__label,
+  .pl-svc__flip:focus-visible .pl-svc__label {
+    opacity: 0;
+  }
+  .pl-svc__flip:hover .pl-svc__cue,
+  .pl-svc__flip:focus-visible .pl-svc__cue {
+    opacity: 0;
+  }
+}
+
+/* En tactil no hay hover: el panel va siempre puesto. Y si esta siempre
+   puesto, la portada tiene que estar siempre desenfocada — es el mismo estado
+   de la tarjeta, no puede verse distinto por no haber puntero. */
+@media (hover: none) {
+  .pl-svc__cover {
+    filter: blur(20px) saturate(1.35) brightness(0.72);
+    transform: scale(1.12);
+  }
+  .pl-svc__info {
+    opacity: 1;
+  }
+  .pl-svc__label {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  /* En angosto la tarjeta se para por debajo del centro, asi que el titular
+     sube para dejarle sitio. */
+  .pl-svc-title {
+    align-self: start;
+    padding-top: 14vh;
+  }
+}
+
+/* El titular queda por DEBAJO de las tarjetas: son ellas las que lo cruzan,
+   y ese cruce es todo el efecto. */
+.pl-svc-title {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pl-svc-deck {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-svc__flip {
+    transition: none;
+  }
+  .pl-svc__cover {
+    transition: none;
+  }
+  /* Sin el latido el punto sigue estando, solo que quieto: el indicio no
+     depende del movimiento, lo usa para llegar antes. */
+  .pl-svc__cue::after {
+    animation: none;
+    opacity: 0.4;
+    transform: scale(2.2);
+  }
+}
+
+/* ============================================================
+   Menu de navegacion en mobile
+
+   Panel que baja desde la cabecera y ocupa lo que le haga falta, no la
+   pantalla entera: son cuatro rotulos y un telefono no necesita una capa a
+   sangre para mostrarlos. Cerrado sigue en el arbol —con inert— para poder
+   animar la salida; sin eso el panel desaparece de golpe al cerrarse.
+
+   grid-template-rows de 0fr a 1fr es lo que permite animar el alto sin
+   conocerlo de antemano. Con max-height habria que adivinar un valor y el
+   cierre saldria con una pausa muerta al principio.
+   ============================================================ */
+
+.pl-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  background-color: var(--pl-color-bg);
+  transition:
+    grid-template-rows var(--pl-duration-slow) var(--pl-ease-quart),
+    border-color var(--pl-duration-slow) var(--pl-ease-quart);
+  border-bottom: var(--pl-border-hairline) solid transparent;
+}
+
+/* El hijo directo es un envoltorio sin padding a proposito: en una fila de
+   0fr el contenido colapsa pero el relleno del propio item no, asi que un
+   padding aca deja el panel cerrado midiendo lo que mide ese padding. El
+   espaciado va adentro, en el <nav>. */
+.pl-menu > * {
+  min-height: 0;
+}
+
+.pl-menu[data-open] {
+  grid-template-rows: 1fr;
+  border-bottom-color: var(--pl-color-border);
+}
+
+/* Los rotulos entran escalonados, uno detras de otro. Un panel donde los
+   cuatro aparecen a la vez se lee como una diapositiva. */
+.pl-menu__item {
+  opacity: 0;
+  transform: translateY(var(--pl-reveal-shift));
+  transition:
+    opacity var(--pl-duration-base) var(--pl-ease-quart),
+    transform var(--pl-duration-base) var(--pl-ease-quart);
+}
+
+.pl-menu[data-open] .pl-menu__item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * var(--pl-stagger));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-menu,
+  .pl-menu__item {
+    transition-duration: 1ms;
+  }
+  .pl-menu__item {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Hamburguesa
+
+   Dos trazos que giran hasta cruzarse. El origen es el centro del icono, no
+   el de cada linea: girando sobre si mismas las dos aspas quedarian
+   descentradas y la cruz saldria torcida.
+   ============================================================ */
+
+.pl-burger__bar {
+  transform-origin: 12px 12px;
+  transition: transform var(--pl-duration-base) var(--pl-ease-quart);
+}
+
+.pl-burger__bar[data-open] {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.pl-burger__bar--bottom[data-open] {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-burger__bar {
+    transition-duration: 1ms;
+  }
+}
+
+
