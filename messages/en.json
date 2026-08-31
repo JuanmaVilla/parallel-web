@@ -366,7 +366,12 @@
     "successHeading": "Got it, thanks",
     "successBody": "We'll listen and get back to you with notes.",
     "errorMessage": "Couldn't send it. Try again or message us on WhatsApp.",
-    "retry": "Retry"
+    "retry": "Retry",
+    "whatsappCta": "On WhatsApp",
+    "emailCta": "By email",
+    "mailSubject": "I have a track for Parallel Studios",
+    "instagramCta": "Follow us",
+    "altChannelsNote": "Rather write us directly? Go ahead. We answer within 24 business hours."
   },
   "services": {
     "mixCraft": {

@@ -38,6 +38,16 @@ const variants: Record<Variant, string> = {
   ghost: "text-accent hover:text-accent-hover",
 };
 
+/**
+ * Las mismas clases, sueltas, para lo que no es un Link tipado: enlaces
+ * externos (wa.me, mailto:) y el <button type="submit"> del formulario.
+ * Existe para que un CTA fuera del router no se dibuje a mano y termine
+ * divergiendo del resto.
+ */
+export function buttonClass(variant: Variant = "secondary", className = "") {
+  return `${base} ${variants[variant]} ${className}`;
+}
+
 export function ButtonLink({
   href,
   variant = "secondary",
@@ -55,7 +65,7 @@ export function ButtonLink({
     variant === "primary"
       ? { backgroundImage: "var(--pl-gradient-brand)" }
       : undefined;
-  const classes = `${base} ${variants[variant]} ${className}`;
+  const classes = buttonClass(variant, className);
 
   // Un ancla de la misma pagina no pasa por el router de next-intl: Link le
   // antepondria el prefijo de idioma y dejaria de ser un salto interno.

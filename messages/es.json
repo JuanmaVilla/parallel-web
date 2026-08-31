@@ -366,7 +366,12 @@
     "successHeading": "Listo, lo recibimos",
     "successBody": "Lo escuchamos y te contestamos apenas tengamos una devolución.",
     "errorMessage": "No se pudo enviar. Probá de nuevo o escribinos por WhatsApp.",
-    "retry": "Reintentar"
+    "retry": "Reintentar",
+    "whatsappCta": "Por WhatsApp",
+    "emailCta": "Por mail",
+    "mailSubject": "Tengo un tema para Parallel Studios",
+    "instagramCta": "Seguinos",
+    "altChannelsNote": "Si preferís, escribinos directo. Contestamos dentro de las 24 horas hábiles."
   },
   "services": {
     "mixCraft": {

@@ -63,7 +63,9 @@ export default async function ContactPage({
 
       <Section tone="bg">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr] lg:gap-24">
-          <LeadForm source="contacto" />
+          {/* Sin los CTA de canal del formulario: WhatsApp, mail e Instagram
+              ya estan en la columna de al lado. */}
+          <LeadForm source="contacto" altChannels={false} />
           <ContactChannels />
         </div>
       </Section>

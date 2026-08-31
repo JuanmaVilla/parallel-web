@@ -3,7 +3,14 @@
 import { useId, useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Magnetic } from "@/components/motion/Magnetic";
-import { TickCircleIcon } from "@/components/ui/icons";
+import { buttonClass } from "@/components/ui/ButtonLink";
+import {
+  InstagramIcon,
+  MailIcon,
+  TickCircleIcon,
+  WhatsAppOutlineIcon,
+} from "@/components/ui/icons";
+import { social } from "@/lib/site-nav";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -25,21 +32,39 @@ const labelClass =
  *
  * Sin zod: cuatro campos no justifican una dependencia nueva. Validacion
  * nativa (required, type="email") + reportValidity() en el submit.
+ *
+ * `altChannels` agrega WhatsApp y mail al lado del envio: hay gente que no
+ * completa formularios y se iba sin dejar rastro. Van en `secondary` —borde,
+ * sin relleno—, asi el degradado del submit sigue siendo el unico elemento
+ * en color de marca del viewport (MARCA.md §3, regla 80/15/5).
+ *
+ * En /contacto se apaga: los mismos canales ya estan en la columna de al
+ * lado (ContactChannels) y repetirlos a dos columnas de distancia no suma
+ * una via nueva, solo ruido.
  */
 export function LeadForm({
   source,
+  altChannels = true,
   className = "",
 }: {
   source: "home" | "contacto";
+  /** CTAs de canal directo junto al envio. */
+  altChannels?: boolean;
   className?: string;
 }) {
   const t = useTranslations("form");
+  const channels = useTranslations("contact.channels");
   const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
   const nameId = useId();
   const emailId = useId();
   const phoneId = useId();
   const messageId = useId();
+
+  // Mismo enlace que arma ContactChannels: el mensaje ya escrito le ahorra
+  // al visitante tener que redactar el primer renglon.
+  const whatsappHref = `https://wa.me/${social.whatsapp.number}?text=${encodeURIComponent(channels("whatsappMessage"))}`;
+  const mailtoHref = `mailto:${social.email.address}?subject=${encodeURIComponent(t("mailSubject"))}`;
 
   if (status === "success") {
     return (
@@ -53,6 +78,30 @@ export function LeadForm({
         <p className="max-w-[42ch] text-body-md leading-body text-ink-secondary">
           {t("successBody")}
         </p>
+
+        {/* La pantalla de exito era un callejon sin salida: el mensaje ya
+            salio y no quedaba nada que hacer. Estas dos salidas no piden
+            convertir de nuevo, ofrecen adonde seguir mientras esperan. */}
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("secondary", "gap-2")}
+          >
+            <WhatsAppOutlineIcon className="size-5" aria-hidden />
+            {t("whatsappCta")}
+          </a>
+          <a
+            href={social.instagram.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("secondary", "gap-2")}
+          >
+            <InstagramIcon className="size-5" aria-hidden />
+            {t("instagramCta")}
+          </a>
+        </div>
       </div>
     );
   }
@@ -174,12 +223,14 @@ export function LeadForm({
         </p>
       ) : null}
 
-      <div>
+      {/* El submit primero y siempre: es la via recomendada, la unica que
+          llega con el tema descrito. Los canales van detras, al ras. */}
+      <div className="flex flex-wrap items-center gap-3">
         <Magnetic>
           <button
             type="submit"
             disabled={submitting}
-            className="inline-flex min-h-11 items-center justify-center rounded-md px-6 py-3 font-sans text-body-md font-bold uppercase tracking-caps text-on-accent transition-all duration-200 ease-standard hover:brightness-110 active:brightness-95 disabled:opacity-60"
+            className={buttonClass("primary", "disabled:opacity-60")}
             style={{ backgroundImage: "var(--pl-gradient-brand)" }}
           >
             {submitting
@@ -189,7 +240,34 @@ export function LeadForm({
                 : t("submit")}
           </button>
         </Magnetic>
+
+        {altChannels ? (
+          <>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClass("secondary", "gap-2")}
+            >
+              <WhatsAppOutlineIcon className="size-5" aria-hidden />
+              {t("whatsappCta")}
+            </a>
+            <a
+              href={mailtoHref}
+              className={buttonClass("secondary", "gap-2")}
+            >
+              <MailIcon className="size-5" aria-hidden />
+              {t("emailCta")}
+            </a>
+          </>
+        ) : null}
       </div>
+
+      {altChannels ? (
+        <p className="text-body-sm leading-body text-ink-secondary">
+          {t("altChannelsNote")}
+        </p>
+      ) : null}
     </form>
   );
 }

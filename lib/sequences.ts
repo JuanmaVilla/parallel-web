@@ -52,13 +52,13 @@ function build(
 
 export const sequences = {
   heroStudio: build("hero-studio", {
-    width: 1446,
+    width: 1920,
     height: 1080,
     // Duracion del encode, no la del master. Coinciden porque se encodea a
     // los 30 fps del original; si se cambia el fps hay que volver a leerla
     // con ffprobe sobre scrub.mp4 (el script la imprime).
-    duration: 9.766667,
-    alt: "Auriculares de estudio y microfono de condensador girando sobre fondo negro hasta separarse y revelar el isotipo de Parallel",
+    duration: 10.133333,
+    alt: "Auriculares de estudio y microfono de condensador girando sobre fondo negro hasta separarse y revelar el logo de Parallel Studios",
   }),
   globoNotas: build("globo-notas", {
     width: 828,
