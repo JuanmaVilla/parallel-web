@@ -8,6 +8,8 @@ import { localePath, ogLocale, siteUrl } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { MotionGuard } from "@/components/motion/MotionGuard";
+import { OffscreenAnimations } from "@/components/motion/OffscreenAnimations";
 import "../globals.css";
 
 /** Primer elemento enfocable de la pagina. Salta la navegacion repetida. */
@@ -19,6 +21,46 @@ function SkipLink() {
     </a>
   );
 }
+
+/**
+ * Guion de arranque. Corre antes de pintar, antes de React, sin depender de
+ * nada que se descargue.
+ *
+ * Contesta una sola pregunta: <<se puede confiar en que este navegador va a
+ * ejecutar el sistema de movimiento?>>. Si la respuesta es que no, marca el
+ * <html> con `data-legacy` y el CSS muestra la pagina entera quieta y
+ * visible. Vale mas un sitio sin animaciones que un sitio en blanco.
+ *
+ * Hay tres formas de contestar que no, y las tres importan porque fallan en
+ * telefonos distintos:
+ *
+ * 1. FALTA LO BASICO. `color-mix()` e `IntersectionObserver` no se eligieron
+ *    aca: los da por sentados Tailwind v4, que declara como minimo Safari
+ *    16.4 / Chrome 111. Por debajo de eso no se rompe una animacion suelta,
+ *    se rompen las utilidades del framework — o sea, medio sitio. Se detectan
+ *    estos dos porque son el canario: si estan, el resto de lo que hace falta
+ *    tambien esta.
+ *
+ * 2. ALGO REVIENTA. Un error no capturado antes de que React hidrate deja los
+ *    bloques en su estado inicial, que es `opacity: 0`. Se escucha `error` a
+ *    nivel window; se descartan los de recursos (una imagen que no carga
+ *    tiene `target` y no deberia apagar el sitio) y los posteriores a la
+ *    hidratacion, que ya no pueden dejar nada escondido.
+ *
+ * 3. NO LLEGA NUNCA. Ni error ni hidratacion: JS que se queda colgado, un
+ *    chunk que no baja, una red que se corta a medias. Para eso esta el
+ *    plazo. Cuatro segundos es de sobra para hidratar incluso en 3G lenta, y
+ *    lo bastante poco como para que nadie se quede mirando un hueco.
+ *
+ * El acuse de recibo lo da MotionGuard quitando `data-boot` al montar. Que la
+ * marca la ponga el HTML y la quite React es lo que hace la prueba honesta:
+ * no se puede quitar sin haber hidratado.
+ */
+const BOOT_SCRIPT = `(function(){var h=document.documentElement;function legacy(){h.setAttribute("data-legacy","")}
+try{if(!window.CSS||!CSS.supports||!CSS.supports("color","color-mix(in srgb,red,blue)")||!("IntersectionObserver" in window))return legacy()}catch(e){return legacy()}
+h.setAttribute("data-boot","");
+window.addEventListener("error",function(e){if(e&&e.target&&e.target!==window)return;if(h.hasAttribute("data-boot"))legacy()});
+setTimeout(function(){if(h.hasAttribute("data-boot"))legacy()},4000)})()`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -120,16 +162,26 @@ export default async function LocaleLayout({
           type="font/woff2"
           crossOrigin=""
         />
+        {/* Antes que nada: decide si este navegador puede con el sistema de
+            movimiento. Ver BOOT_SCRIPT. */}
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
         {/* Los bloques con revelado arrancan en opacity 0 y las palabras de
             los titulares escondidas detras de su mascara. Los enciende JS, asi
             que sin JS la pagina quedaria en blanco: esto los deja visibles de
-            entrada en ese caso. */}
+            entrada en ese caso.
+
+            Cubre solo el caso de JS desactivado. El de JS que esta pero
+            falla lo cubre BOOT_SCRIPT con `data-legacy`, y las reglas son
+            las MISMAS — ver el bloque "Modo legado" en globals.css. Si se
+            toca una lista, se toca la otra. */}
         <noscript>
           <style>{`[data-reveal],[data-reveal-stagger]>*,.pl-split__word>span,.pl-stack__item,.pl-stack__line{opacity:1!important;transform:none!important}.pl-stack__lines{display:flex!important;flex-direction:column;gap:var(--pl-space-3)}.pl-stack__line{max-width:none}.pl-punch{color:var(--pl-orange)!important;text-shadow:var(--pl-glow-punch)}.pl-punch__bolt{width:62%}`}</style>
         </noscript>
       </head>
       <body className="pl-grain bg-bg font-sans text-ink-body antialiased">
         <NextIntlClientProvider>
+          <MotionGuard />
+          <OffscreenAnimations />
           <SkipLink />
           <Header />
           {/* min-h calculado contra el alto del header para que el pie no

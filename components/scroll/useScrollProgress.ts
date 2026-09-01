@@ -21,9 +21,12 @@ type Mode =
  *
  * Decisiones deliberadas:
  * - IntersectionObserver decide CUANDO medir. Fuera de viewport no se hace
- *   ningun trabajo: sin listener de scroll global, sin rAF corriendo.
+ *   ningun trabajo: sin rAF corriendo.
  * - Dentro de viewport se mide con rAF, no con el evento scroll. El evento
  *   dispara mas seguido que los frames y provoca lecturas de layout de mas.
+ *   El scroll solo DESPIERTA el bucle; medir sigue siendo cosa del frame.
+ * - El bucle se duerme cuando el valor deja de cambiar. Una secuencia en
+ *   pantalla con la pagina quieta no tiene por que gastar un frame.
  * - Se lee getBoundingClientRect una vez por frame y se escribe despues.
  *   Nunca se intercalan lecturas y escrituras de layout.
  */
@@ -39,6 +42,10 @@ export function useScrollProgress<T extends HTMLElement>(mode: Mode = "sticky") 
     let rafId = 0;
     let inView = false;
     let last = -1;
+    // Frames seguidos sin cambio antes de dormir. Uno solo no alcanza: el
+    // ultimo frame de una inercia tactil suele repetir valor y cortar ahi
+    // deja el scrub un pelo antes de donde quedo el dedo.
+    let still = 0;
 
     const measure = () => {
       const rect = el.getBoundingClientRect();
@@ -60,10 +67,28 @@ export function useScrollProgress<T extends HTMLElement>(mode: Mode = "sticky") 
       // Umbral para no re-renderizar por cambios sub-pixel.
       if (Math.abs(next - last) > 0.0005) {
         last = next;
+        still = 0;
         setProgress(next);
+      } else {
+        still++;
       }
 
-      if (inView) rafId = requestAnimationFrame(measure);
+      if (!inView) {
+        rafId = 0;
+        return;
+      }
+      if (still > 2) {
+        rafId = 0;
+        return;
+      }
+      rafId = requestAnimationFrame(measure);
+    };
+
+    // rafId === 0 es la marca de "dormido".
+    const wake = () => {
+      if (!inView || rafId) return;
+      still = 0;
+      rafId = requestAnimationFrame(measure);
     };
 
     const observer = new IntersectionObserver(
@@ -71,18 +96,23 @@ export function useScrollProgress<T extends HTMLElement>(mode: Mode = "sticky") 
         inView = entry.isIntersecting;
         setIsActive(inView);
         if (inView) {
-          rafId = requestAnimationFrame(measure);
+          wake();
         } else {
           cancelAnimationFrame(rafId);
+          rafId = 0;
         }
       },
       { rootMargin: "100px 0px" },
     );
 
     observer.observe(el);
+    window.addEventListener("scroll", wake, { passive: true });
+    window.addEventListener("resize", wake);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", wake);
+      window.removeEventListener("resize", wake);
       cancelAnimationFrame(rafId);
     };
   }, [mode]);

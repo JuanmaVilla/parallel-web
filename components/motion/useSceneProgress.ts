@@ -107,16 +107,46 @@ export function useSceneProgress<
       write(current);
       frameRef.current?.(current, time);
 
-      if (inView) raf = requestAnimationFrame(tick);
+      if (!inView) {
+        raf = 0;
+        return;
+      }
+
+      // El bucle se apaga cuando ya alcanzo al objetivo y nadie scrollea.
+      // Lo despierta `wake` desde el listener de scroll.
+      //
+      // Sin esto, cada escena en pantalla deja un rAF vivo leyendo
+      // getBoundingClientRect sesenta veces por segundo aunque la pagina
+      // este quieta. En un escritorio no se nota; en un telefono con tres o
+      // cuatro escenas a la vez son tres o cuatro lecturas de layout por
+      // frame compitiendo por el mismo presupuesto, y es lo que hace que el
+      // scroll se sienta pastoso incluso cuando no hay nada moviendose.
+      if (Math.abs(goal - current) < 0.0002) {
+        current = goal;
+        write(current);
+        raf = 0;
+        return;
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    // raf === 0 es la marca de "dormido". Si ya hay un frame pedido, no se
+    // pide otro: dos bucles sobre la misma escena avanzarian el lerp al doble
+    // de velocidad.
+    const wake = () => {
+      if (!inView || raf) return;
+      raf = requestAnimationFrame(tick);
     };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         inView = entry.isIntersecting;
         if (inView) {
-          raf = requestAnimationFrame(tick);
+          wake();
         } else {
           cancelAnimationFrame(raf);
+          raf = 0;
           // Al salir se deja el valor del extremo, no el ultimo interpolado:
           // si no, la escena queda congelada a medio camino al volver.
           current = read();
@@ -129,9 +159,16 @@ export function useSceneProgress<
     );
 
     observer.observe(scene);
+    // `passive` para que el navegador no espere a ver si el handler cancela
+    // el scroll: sin eso el listener se mete en el camino del scroll nativo,
+    // que es justo lo que no se quiere en tactil.
+    window.addEventListener("scroll", wake, { passive: true });
+    window.addEventListener("resize", wake);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", wake);
+      window.removeEventListener("resize", wake);
       cancelAnimationFrame(raf);
     };
   }, [mode, smoothing]);

@@ -228,6 +228,29 @@
     0 0 18px rgba(var(--pl-orange-rgb), 0.55),
     0 0 60px rgba(var(--pl-red-rgb), 0.3);
 
+  /* ---------- Desenfoques ---------- */
+  /* El radio de un blur no es un valor decorativo: es el que decide si la
+     pagina se mueve en un telefono. El coste de rasterizar un desenfoque
+     crece con el cuadrado del radio, y crece OTRA VEZ cada frame si el
+     elemento desenfocado esta dentro de algo que se mueve — que es el caso
+     de las tres de abajo. Por eso viven aca y no sueltas en su regla: en
+     angosto se recortan de una sola vez, al final de este archivo.
+
+     Los valores de escritorio son los de diseno y no se tocan. */
+
+  /* Halo del hero. Va detras del titular y ademas escala con el scroll, asi
+     que se re-rasteriza en cada frame de la escena de apertura. */
+  --pl-blur-halo: 40px;
+  /* Halo de ambiente de seccion. Quieto, pero a pantalla completa. */
+  --pl-blur-ambient: 30px;
+  /* Portada de tarjeta de servicio. Pasados los ~18px la foto deja de ser
+     una foto y pasa a ser una mancha de color, que es lo que se busca. */
+  --pl-blur-cover: 20px;
+  /* Barra de navegacion translucida. backdrop-filter obliga al navegador a
+     leer lo que hay DEBAJO en cada frame de scroll; es el mas caro de los
+     cuatro por unidad de radio. */
+  --pl-blur-chrome: 12px;
+
   /* ---------- Movimiento ---------- */
   /* Interfaz: cambios de estado, hover, foco. Cortos y sin caracter. */
   --pl-duration-fast: 120ms;
@@ -466,5 +489,36 @@ p { max-width: var(--pl-measure); }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Tier de telefono
+
+   Lo de arriba es el sistema. Esto es lo unico que cambia por tamano de
+   pantalla, y cambia solo numeros: ninguna regla se duplica y ningun
+   componente se entera.
+
+   El motivo es de presupuesto de frame, no de gusto. Un telefono de gama
+   media compone a una fraccion del ancho de banda de memoria de un
+   escritorio, y la home apila varias escenas dirigidas por scroll que ya se
+   llevan el frame entero. Los desenfoques grandes son lo que las empuja por
+   encima de los 16ms: el mismo radio que en un portatil no se nota, en un
+   telefono es la diferencia entre scroll liso y scroll a tirones.
+
+   Los radios bajan, no se van a cero. A la mitad el efecto se sigue leyendo
+   —el halo sigue siendo un halo y la portada sigue siendo una mancha— y el
+   coste cae a la cuarta parte. Lo unico que si se apaga es el backdrop de la
+   barra, porque ese no se puede abaratar: o lee el fondo en cada frame o no
+   lo lee.
+   ============================================================ */
+@media (max-width: 767px) {
+  :root {
+    --pl-blur-halo: 18px;
+    --pl-blur-ambient: 14px;
+    --pl-blur-cover: 10px;
+    /* 0 = sin backdrop-filter. La barra lo compensa con fondo mas opaco;
+       ver .pl-header en globals.css. */
+    --pl-blur-chrome: 0px;
   }
 }

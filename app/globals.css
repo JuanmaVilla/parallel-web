@@ -233,7 +233,7 @@ body {
   width: min(92vw, 46rem);
   aspect-ratio: 1;
   background: var(--pl-gradient-glow-red);
-  filter: blur(40px);
+  filter: blur(var(--pl-blur-halo));
   scale: calc(1 + var(--p, 0) * 0.45);
   will-change: transform;
 }
@@ -700,7 +700,7 @@ body {
   pointer-events: none;
   background: var(--pl-gradient-glow-red);
   opacity: 0.35;
-  filter: blur(30px);
+  filter: blur(var(--pl-blur-ambient));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1035,7 +1035,23 @@ body {
 .pl-header[data-solid] {
   background-color: color-mix(in srgb, var(--pl-color-bg) 85%, transparent);
   border-bottom-color: var(--pl-color-border);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--pl-blur-chrome));
+}
+
+/* En angosto --pl-blur-chrome vale 0, asi que la barra se queda sin el
+   desenfoque que separaba el menu de lo que pasa por debajo. Lo reemplaza el
+   fondo: casi opaco en vez de translucido.
+
+   No es una perdida de diseno, es el mismo trabajo hecho con la herramienta
+   barata. backdrop-filter obliga a releer y desenfocar todo lo que hay bajo
+   la barra en CADA frame de scroll — y la barra esta fija, o sea que eso
+   pasa siempre, en toda la pagina, mientras el resto de las escenas ya
+   estan peleando por el frame. Un color opaco no cuesta nada y en una franja
+   de 4rem con texto encima la diferencia no se ve. */
+@media (max-width: 767px) {
+  .pl-header[data-solid] {
+    background-color: color-mix(in srgb, var(--pl-color-bg) 96%, transparent);
+  }
 }
 
 /* ============================================================
@@ -1805,7 +1821,7 @@ body {
        un cuarto de brillo menos baja el techo, y la saturacion sube para que
        el color no se apague al hacerlo. El resto lo ponen la plancha del
        panel y la sombra del texto. */
-    filter: blur(20px) saturate(1.35) brightness(0.72);
+    filter: blur(var(--pl-blur-cover)) saturate(1.35) brightness(0.72);
     transform: scale(1.12);
   }
 }
@@ -1921,7 +1937,7 @@ body {
    de la tarjeta, no puede verse distinto por no haber puntero. */
 @media (hover: none) {
   .pl-svc__cover {
-    filter: blur(20px) saturate(1.35) brightness(0.72);
+    filter: blur(var(--pl-blur-cover)) saturate(1.35) brightness(0.72);
     transform: scale(1.12);
   }
   .pl-svc__info {
@@ -2062,3 +2078,137 @@ body {
 }
 
 
+
+/* ============================================================
+   Tier de telefono: lo que se apaga
+
+   Los radios de desenfoque ya se recortan solos desde tokens.css. Aca queda
+   lo que no es un numero sino una decision: efectos que en un telefono
+   cuestan un frame entero y devuelven algo que en esa pantalla no se ve.
+
+   La regla para decidir fue siempre la misma: si el efecto sigue leyendose a
+   la mitad de su valor, se recorta; si su coste no baja con el valor, se
+   apaga. Nada de esto es una version degradada del sitio — es el mismo sitio
+   con lo que no llega a percibirse quitado de en medio.
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* Grano fuera.
+     Va a opacity 0.04 sobre una capa fija a pantalla completa, o sea que el
+     navegador la compone encima de TODO lo que scrollea, siempre, en toda la
+     pagina. Ese es el coste. El beneficio, a esa opacidad y a la densidad de
+     pixel de un telefono, es literalmente invisible: el grano existe para
+     que un negro plano no se lea barato en un monitor grande, y en una
+     pantalla de 6 pulgadas ese negro plano no llega a leerse plano. */
+  .pl-grain::after {
+    display: none;
+  }
+}
+
+/* Portada de tarjeta de servicio, en tactil.
+ *
+ * En tactil el desenfoque es PERMANENTE (no hay hover que lo encienda), y la
+ * tarjeta entera se traslada en cada frame mientras cruza la pantalla. Esa
+ * combinacion es la peor posible: sin una capa propia, el navegador vuelve a
+ * rasterizar el desenfoque en cada posicion nueva, aunque el desenfoque en si
+ * no haya cambiado ni un pixel.
+ *
+ * translateZ(0) le da esa capa. La portada se desenfoca UNA vez, queda como
+ * textura, y el recorrido pasa a ser lo que deberia haber sido siempre:
+ * mover una textura ya hecha. Es el mismo pixel en pantalla por una fraccion
+ * del trabajo.
+ *
+ * Va aca y no en el bloque de `hover: none` de arriba para que quede junto a
+ * su explicacion: alli parece un adorno y se borra en la primera limpieza.
+ */
+@media (hover: none) {
+  .pl-svc__cover {
+    transform: scale(1.12) translateZ(0);
+  }
+}
+
+/* ============================================================
+   Modo legado
+
+   `data-legacy` lo pone BOOT_SCRIPT (app/[locale]/layout.tsx) cuando el
+   navegador no tiene con que sostener el sistema de movimiento, cuando algo
+   revienta antes de hidratar, o cuando la hidratacion no llega nunca. Alli
+   esta el porque de cada caso.
+
+   Lo que hace es una sola cosa: DESHACER LO QUE ESCONDE. El sitio arranca con
+   los bloques apagados y las palabras de los titulares detras de su mascara
+   porque cuenta con que JS las encienda; si eso no va a pasar, hay que
+   encenderlas aca o la pagina queda vacia. Un sitio sin animaciones se lee;
+   un sitio en blanco no.
+
+   Es deliberadamente la misma lista que el <style> del <noscript> en el
+   layout — mismo problema, dos disparadores. Si se toca una, se toca la otra.
+
+   Va sin capa y con !important a proposito: tiene que ganarle a las
+   utilidades de Tailwind y a los estados en linea, sea cual sea el orden en
+   que se hayan resuelto. Es la ultima red; no puede perder una pulseada de
+   especificidad.
+   ============================================================ */
+
+:root[data-legacy] [data-reveal],
+:root[data-legacy] [data-reveal-stagger] > *,
+:root[data-legacy] .pl-split__word > span,
+:root[data-legacy] .pl-stack__item,
+:root[data-legacy] .pl-stack__line {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+:root[data-legacy] .pl-stack__lines {
+  display: flex !important;
+  flex-direction: column;
+  gap: var(--pl-space-3);
+}
+
+:root[data-legacy] .pl-stack__line {
+  max-width: none;
+}
+
+:root[data-legacy] .pl-punch {
+  color: var(--pl-orange) !important;
+  text-shadow: var(--pl-glow-punch);
+}
+
+:root[data-legacy] .pl-punch__bolt {
+  width: 62%;
+}
+
+/* Las escenas de scroll se quedan en --p = 0, que es un estado valido y
+   legible. Lo que no puede quedarse es el contenido del hero apagado: su
+   opacidad la maneja --exit, y sin rAF que mueva --p el calc da 1 igual —
+   salvo que el navegador no sepa resolverlo, que es justo el supuesto de este
+   modo. Se fija a mano. */
+:root[data-legacy] .pl-hero__content {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Sin bucle que las alimente, las capas caras solo cuestan. Fuera. */
+:root[data-legacy] .pl-hero__halo-wrap,
+:root[data-legacy] .pl-ambient,
+:root[data-legacy] .pl-grain::after {
+  display: none !important;
+}
+
+/* Un contenedor de 300vh con un hijo sticky, sin nada que anime dentro, es
+   tres pantallas de vacio. Se colapsa al alto de su contenido. */
+:root[data-legacy] .pl-scene__stage {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+}
+
+/* Freno de las animaciones infinitas fuera de pantalla.
+   El atributo lo pone components/motion/OffscreenAnimations.tsx; alli esta
+   medido por que hacia falta. Pausado y no parado: al volver, la animacion
+   sigue donde estaba en vez de saltar al principio. */
+[data-offscreen] {
+  animation-play-state: paused !important;
+}
