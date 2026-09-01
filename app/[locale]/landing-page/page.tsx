@@ -89,7 +89,9 @@ export default async function LandingPage({
       <DiscScene />
       <SequenceSection />
       <ChapterBreak accent />
-      <Services />
+      {/* Los CTA de las dos secciones apuntan al ancla del formulario:
+          la landing es una sola pagina y no sale de si misma. */}
+      <Services ctaHref="#contacto" />
       <WhyParallel />
       {/* El detalle tecnico de cada servicio. Venian de la vieja pagina
           /servicios; al pasar a landing se montan aca, que es ahora la
@@ -100,7 +102,7 @@ export default async function LandingPage({
       <MixCraft />
       <MasteringDeep />
       <Process />
-      <BeforeAfter />
+      <BeforeAfter ctaHref="#contacto" packagesHref="#paquetes" />
       <Faq />
       <LeadFormSection />
     </>

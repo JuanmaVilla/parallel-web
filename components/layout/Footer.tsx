@@ -1,11 +1,53 @@
+"use client";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { author, legalItems, navItems, social } from "@/lib/site-nav";
 import { SocialLinks } from "./SocialLinks";
 
 /**
- * Pie del sitio. Server component: no tiene estado ni interaccion.
+ * Pie minimo de /landing-page.
+ *
+ * Tres renglones y nada mas: de que se trata el estudio, los derechos, y
+ * quien hizo el sitio. La landing es una sola pagina con una sola accion —el
+ * formulario del final— y un pie con navegacion, canales y legales le pone
+ * diez salidas justo despues del unico lugar donde tiene que convertir. Es
+ * la misma razon por la que el Header le esconde la navegacion.
+ *
+ * La firma va en texto plano, sin enlace ni logo: acredita a quien hizo el
+ * sitio sin abrir una puerta hacia afuera en el ultimo renglon de la pagina.
+ * En el pie completo del resto del sitio sigue siendo una tarjeta enlazada.
+ *
+ * El relleno a la derecha le deja sitio al boton flotante de WhatsApp, que
+ * es fijo al viewport y al final de la pagina cae encima de este renglon.
+ */
+function LandingFooter() {
+  const t = useTranslations("footer");
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="border-t border-line bg-bg">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-2 px-4 py-10 pr-20 lg:px-16 lg:pr-24">
+        <p className="text-caption leading-body text-ink-secondary">
+          {t("location")}
+        </p>
+        <p className="text-caption leading-body text-ink-secondary">
+          © {year} Parallel Studios. {t("rights")}
+        </p>
+        <p className="text-caption leading-body text-ink-muted">
+          {t("creditPrefix")} {author.name}
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+/**
+ * Pie del sitio.
+ *
+ * Cliente por una sola razon: tiene que saber si esta en /landing-page para
+ * cambiar a LandingFooter. No tiene estado propio ni interaccion.
  *
  * Un solo bloque, no dos. La marca, la navegacion, los canales y la firma de
  * quien hizo el sitio van en la misma fila de columnas, y debajo una unica
@@ -25,7 +67,14 @@ import { SocialLinks } from "./SocialLinks";
 export function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  // `usePathname` devuelve el path INTERNO, no el traducido: la comparacion
+  // vale igual en los dos idiomas. Mismo criterio que el Header.
+  if (pathname === "/landing-page") {
+    return <LandingFooter />;
+  }
 
   return (
     <footer className="border-t border-line bg-bg">

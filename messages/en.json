@@ -113,7 +113,10 @@
       "cta": "See all packages",
       "headingAccent": "TO START",
       "badge": "MOST CHOSEN",
-      "itemCta": "See details"
+      "itemCta": "See details",
+      "ctaLead": "You picked one, or none of them fit. Both get sorted out by writing to us.",
+      "ctaPrimary": "Send us your track",
+      "ctaWhatsapp": "Ask on WhatsApp"
     },
     "why": {
       "eyebrow": "WHY PARALLEL",
@@ -161,7 +164,10 @@
       "headingAccent": "IS HEARD",
       "before": "BEFORE",
       "after": "AFTER",
-      "pending": "Audio not uploaded yet"
+      "pending": "Audio not uploaded yet",
+      "ctaLead": "That's how we deliver. Send us your track and we'll tell you what can be done with it.",
+      "ctaPrimary": "Send us your track",
+      "ctaSecondary": "See packages"
     },
     "faq": {
       "eyebrow": "FREQUENTLY ASKED",

@@ -2,6 +2,9 @@ import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { AudioPlayer } from "@/components/audio/AudioPlayer";
 import { RevealList } from "@/components/motion/RevealList";
+import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { ButtonLink, type Href } from "@/components/ui/ButtonLink";
 import { audioTrackBySlug } from "@/lib/audio";
 
 type Item = { heading: string; body: string; slug?: string };
@@ -26,8 +29,23 @@ type Item = { heading: string; body: string; slug?: string };
  *
  * Un solo transporte para toda la seccion: al darle play a un tema, el otro
  * se detiene.
+ *
+ * Cierra con la accion. Escuchar un master terminado es el momento de mayor
+ * intencion de toda la pagina, y hasta ahora la seccion no ofrecia nada que
+ * hacer con eso. Los dos botones van sin degradado —el color de marca de
+ * esta pantalla son las envolventes— y el segundo lleva a los precios, que
+ * es lo que se pregunta despues de escuchar.
+ *
+ * Los dos destinos cambian con la pagina: en /landing-page son anclas de la
+ * misma pagina, en el home viven en otras rutas.
  */
-export function BeforeAfter() {
+export function BeforeAfter({
+  ctaHref = "/contacto",
+  packagesHref = "/servicios",
+}: {
+  ctaHref?: Href;
+  packagesHref?: Href;
+} = {}) {
   const t = useTranslations("home.beforeAfter");
   const items = t.raw("items") as Item[];
 
@@ -93,6 +111,27 @@ export function BeforeAfter() {
           );
         })}
       </RevealList>
+
+      <div className="mt-16 flex flex-col items-center gap-6 text-center">
+        <Reveal>
+          <p className="max-w-[46ch] text-body-lg leading-body text-ink-body">
+            {t("ctaLead")}
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Magnetic>
+              <ButtonLink href={ctaHref} variant="inverse">
+                {t("ctaPrimary")}
+              </ButtonLink>
+            </Magnetic>
+            <ButtonLink href={packagesHref} variant="secondary">
+              {t("ctaSecondary")}
+            </ButtonLink>
+          </div>
+        </Reveal>
+      </div>
     </Section>
   );
 }

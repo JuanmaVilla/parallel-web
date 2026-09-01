@@ -1,6 +1,11 @@
 import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { RevealList } from "@/components/motion/RevealList";
+import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { ButtonLink, buttonClass, type Href } from "@/components/ui/ButtonLink";
+import { WhatsAppOutlineIcon } from "@/components/ui/icons";
+import { social } from "@/lib/site-nav";
 
 type ServiceItem = {
   heading: string;
@@ -22,12 +27,24 @@ type ServiceItem = {
  * Una sola tarjeta esta destacada, con el borde vivo de marca y etiqueta.
  * Tres tarjetas identicas no le dicen al ojo por donde empezar, que es lo que
  * hace que un bloque de precios se lea "plano". El borde girando es el unico
- * elemento en color de marca de la seccion, y por eso el CTA del pie va
- * secundario (MARCA.md §3).
+ * elemento en color de marca de la seccion, y por eso el CTA del pie NO va
+ * en degradado (MARCA.md §3).
+ *
+ * El pie de la seccion cierra con la accion. Quien termino de leer tres
+ * precios ya decidio: dejarlo ahi lo obliga a seguir scrolleando hasta el
+ * formulario del final para hacer algo con esa decision. `inverse` —solido
+ * blanco— y no `primary`: el presupuesto de color de marca de esta pantalla
+ * se lo lleva el borde de la tarjeta destacada.
+ *
+ * `ctaHref` cambia con la pagina: en /landing-page el formulario es un ancla
+ * de la misma pagina; en /servicios vive en otra ruta.
  */
-export function Services() {
+export function Services({ ctaHref = "/contacto" }: { ctaHref?: Href } = {}) {
   const t = useTranslations("home.services");
+  const channels = useTranslations("contact.channels");
   const items = t.raw("items") as ServiceItem[];
+
+  const whatsappHref = `https://wa.me/${social.whatsapp.number}?text=${encodeURIComponent(channels("whatsappMessage"))}`;
 
   return (
     <Section id="paquetes" tone="surface">
@@ -94,6 +111,31 @@ export function Services() {
       </RevealList>
 
       <div className="mt-16 flex flex-col items-center gap-6 text-center">
+        <Reveal>
+          <p className="max-w-[46ch] text-body-lg leading-body text-ink-body">
+            {t("ctaLead")}
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Magnetic>
+              <ButtonLink href={ctaHref} variant="inverse">
+                {t("ctaPrimary")}
+              </ButtonLink>
+            </Magnetic>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClass("secondary", "gap-2")}
+            >
+              <WhatsAppOutlineIcon className="size-5" aria-hidden />
+              {t("ctaWhatsapp")}
+            </a>
+          </div>
+        </Reveal>
+
         <p className="max-w-[58ch] text-body-sm leading-body text-ink-secondary">
           {t("launchNote")}
         </p>

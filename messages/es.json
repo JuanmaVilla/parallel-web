@@ -113,7 +113,10 @@
       "cta": "Ver todos los paquetes",
       "headingAccent": "EMPEZAR",
       "badge": "EL MAS ELEGIDO",
-      "itemCta": "Ver detalle"
+      "itemCta": "Ver detalle",
+      "ctaLead": "Elegiste uno, o ninguno te cierra. Las dos cosas se resuelven escribiendo.",
+      "ctaPrimary": "Mandanos tu tema",
+      "ctaWhatsapp": "Preguntar por WhatsApp"
     },
     "why": {
       "eyebrow": "POR QUE PARALLEL",
@@ -161,7 +164,10 @@
       "headingAccent": "SE ESCUCHA",
       "before": "ANTES",
       "after": "DESPUÉS",
-      "pending": "Audio pendiente de carga"
+      "pending": "Audio pendiente de carga",
+      "ctaLead": "Así entregamos. Mandanos tu tema y te decimos qué se puede hacer con él.",
+      "ctaPrimary": "Mandanos tu tema",
+      "ctaSecondary": "Ver paquetes"
     },
     "faq": {
       "eyebrow": "PREGUNTAS FRECUENTES",
